@@ -1,0 +1,1290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>EaselJS API Documentation</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1322353213.25" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1322353213.25" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1322353213.25"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1322353213.25"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://easeljs.com/" title="EaselJS">EaselJS</a></h1>
+        <h3>EaselJS&nbsp; <span class="subtitle">0.4</span></h3>
+        <a href="./index.html" title="EaselJS">EaselJS</a> 
+            &gt; <a href="./module_easeljs.html" title="EaselJS">EaselJS</a>
+                 &gt; BitmapAnimation 
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <h2>
+                        
+
+                        
+                        
+                            Class <b property="yui:name">BitmapAnimation</b>
+                        <span class="extends">
+                           - extends <a href="DisplayObject.html" title="DisplayObject">DisplayObject</a>
+                        </span>
+
+                    </h2>
+                    <!-- class tree goes here -->
+                    
+                
+  
+
+                    <div class="summary description" property="yui:description">
+                        Displays frames or sequences of frames (ie. animations) from a sprite sheet image. A sprite sheet is a series of images
+(usually animation frames) combined into a single image. For example, an animation
+consisting of 8 100x100 images could be combined into a 400x200 sprite sheet (4 frames across by 2 high).
+You can display individual frames, play frames as an animation, and even sequence animations
+together. See the SpriteSheet class for more information on setting up frames and animations.
+                    </div>
+
+                        <div class="section constructor details" rel="yui:constructor" resource="#constructor">
+                        <h3 id="constructor">Constructor</h3>
+                        <div class="content">
+                            <div class="detail">
+                                <strong property="yui:name">BitmapAnimation</strong>
+                                <code>
+                                    (
+  
+                                        
+                                                
+                                                spriteSheet
+                                    )
+                                </code>
+                                <div class="description">
+                                        <dl rel="yui:parameters">
+                                            <dt>Parameters:</dt>
+                                                <dd rel="yui:parameter">
+                                                    <code><span property="yui:name">spriteSheet</span>
+                                                    &lt;<span property="yui:type">SpriteSheet</span>&gt;
+                                                    </code>
+                                                    <span property="yui:description"> The SpriteSheet instance to play back. This includes the source image(s), frame
+dimensions, and frame data. See SpriteSheet for more information.</span>
+                                                </dd>
+                                        </dl>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div rel="yui:properties" resource="#properties">
+                        <div class="section field details">
+                            <h3 id="properties">Properties</h3>
+                            <div class="content">
+                                    <div class="protected" rel="yui:property" resource="#property__advanceCount">
+                                    <h4><a name="property__advanceCount" property="yui:name">_advanceCount</a>
+                                        - <code>protected <span property="yui:type">Number</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: 0
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:property" resource="#property__animation">
+                                    <h4><a name="property__animation" property="yui:name">_animation</a>
+                                        - <code>protected <span property="yui:type">Object</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: null
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_currentAnimation">
+                                    <h4><a name="property_currentAnimation" property="yui:name">currentAnimation</a>
+                                        - <code>final <span property="yui:type">String</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Returns the currently playing animation. READ-ONLY.
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_currentAnimationFrame">
+                                    <h4><a name="property_currentAnimationFrame" property="yui:name">currentAnimationFrame</a>
+                                        - <code><span property="yui:type">Number</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Specifies the current frame index within the current playing animation. When playing normally, this will
+increase successively from 0 to n-1, where n is the number of frames in the current animation.
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: 0
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_currentFrame">
+                                    <h4><a name="property_currentFrame" property="yui:name">currentFrame</a>
+                                        - <code><span property="yui:type">Number</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            The frame that will be drawn when draw is called. Note that with some SpriteSheet data, this
+will advance non-sequentially. READ-ONLY.
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: -1
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_offset">
+                                    <h4><a name="property_offset" property="yui:name">offset</a>
+                                        - <code><span property="yui:type">Number</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            When used in conjunction with animations having an frequency greater than 1, this lets you offset which tick the playhead will
+advance on. For example, you could create two BitmapAnimations, both playing an animation with a frequency of 2, but one
+having offset set to 1. Both instances would advance every second tick, but they would advance on alternating
+ticks (effectively, one instance would advance on odd ticks, the other on even ticks).
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: 0
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_onAnimationEnd">
+                                    <h4><a name="property_onAnimationEnd" property="yui:name">onAnimationEnd</a>
+                                        - <code><span property="yui:type">Function</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Specifies a function to call whenever any animation reaches its end. It will be called with two
+params: the first will be a reference to this instance, the second will be the name of the animation
+that just ended.
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_paused">
+                                    <h4><a name="property_paused" property="yui:name">paused</a>
+                                        - <code><span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Prevents the animation from advancing each tick automatically. For example, you could create a sprite
+sheet of icons, set paused to true, and display the appropriate icon by setting currentFrame.
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: false
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_snapToPixel">
+                                    <h4><a name="property_snapToPixel" property="yui:name">snapToPixel</a>
+                                        - <code><span property="yui:type">Boolean</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            Whether or not the Bitmap should be draw to the canvas at whole pixel coordinates.
+                                        </div>
+                                    </div>
+     
+                                        
+                                    <div class="default" property="yui:defaultValue">
+                                        Default Value: true
+                                    </div>        
+
+
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:property" resource="#property_spriteSheet">
+                                    <h4><a name="property_spriteSheet" property="yui:name">spriteSheet</a>
+                                        - <code><span property="yui:type">SpriteSheet</span></code>
+                                    </h4>
+                                    <div class="detail">
+                                        <div class="description" property="yui:description">
+                                            The SpriteSheet instance to play back. This includes the source image, frame dimensions, and frame
+data. See SpriteSheet for more information.
+                                        </div>
+                                    </div>
+     
+                                        
+
+
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div rel="yui:inheritance">
+                        <div class="section field inheritance" rel="yui:superclass"  resource="DisplayObject.html">
+                            <h4>Properties inherited from <a href="DisplayObject.html" property="yui:name" title="DisplayObject">DisplayObject</a>:</h4>
+                            <div class="content" rel="yui:properties">
+                                <code>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property__cacheDataURL">
+                                        <a class="protected" href="DisplayObject.html#property__cacheDataURL" property="yui:name" title="_cacheDataURL">_cacheDataURL</a><span class="protected">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property__cacheDataURLID">
+                                        <a class="protected" href="DisplayObject.html#property__cacheDataURLID" property="yui:name" title="_cacheDataURLID">_cacheDataURLID</a><span class="protected">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property__cacheOffsetX">
+                                        <a class="protected" href="DisplayObject.html#property__cacheOffsetX" property="yui:name" title="_cacheOffsetX">_cacheOffsetX</a><span class="protected">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property__cacheOffsetY">
+                                        <a class="protected" href="DisplayObject.html#property__cacheOffsetY" property="yui:name" title="_cacheOffsetY">_cacheOffsetY</a><span class="protected">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property__matrix">
+                                        <a class="protected" href="DisplayObject.html#property__matrix" property="yui:name" title="_matrix">_matrix</a><span class="protected">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_alpha">
+                                        <a class="" href="DisplayObject.html#property_alpha" property="yui:name" title="alpha">alpha</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_cacheCanvas">
+                                        <a class="" href="DisplayObject.html#property_cacheCanvas" property="yui:name" title="cacheCanvas">cacheCanvas</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_cacheID">
+                                        <a class="" href="DisplayObject.html#property_cacheID" property="yui:name" title="cacheID">cacheID</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_compositeOperation">
+                                        <a class="" href="DisplayObject.html#property_compositeOperation" property="yui:name" title="compositeOperation">compositeOperation</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_filters">
+                                        <a class="" href="DisplayObject.html#property_filters" property="yui:name" title="filters">filters</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_id">
+                                        <a class="" href="DisplayObject.html#property_id" property="yui:name" title="id">id</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_mouseEnabled">
+                                        <a class="" href="DisplayObject.html#property_mouseEnabled" property="yui:name" title="mouseEnabled">mouseEnabled</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_name">
+                                        <a class="" href="DisplayObject.html#property_name" property="yui:name" title="name">name</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_parent">
+                                        <a class="" href="DisplayObject.html#property_parent" property="yui:name" title="parent">parent</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_regX">
+                                        <a class="" href="DisplayObject.html#property_regX" property="yui:name" title="regX">regX</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_regY">
+                                        <a class="" href="DisplayObject.html#property_regY" property="yui:name" title="regY">regY</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_rotation">
+                                        <a class="" href="DisplayObject.html#property_rotation" property="yui:name" title="rotation">rotation</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_scaleX">
+                                        <a class="" href="DisplayObject.html#property_scaleX" property="yui:name" title="scaleX">scaleX</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_scaleY">
+                                        <a class="" href="DisplayObject.html#property_scaleY" property="yui:name" title="scaleY">scaleY</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_shadow">
+                                        <a class="" href="DisplayObject.html#property_shadow" property="yui:name" title="shadow">shadow</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_skewX">
+                                        <a class="" href="DisplayObject.html#property_skewX" property="yui:name" title="skewX">skewX</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_skewY">
+                                        <a class="" href="DisplayObject.html#property_skewY" property="yui:name" title="skewY">skewY</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_snapToPixel">
+                                        <a class="" href="DisplayObject.html#property_snapToPixel" property="yui:name" title="snapToPixel">snapToPixel</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_visible">
+                                        <a class="" href="DisplayObject.html#property_visible" property="yui:name" title="visible">visible</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_x">
+                                        <a class="" href="DisplayObject.html#property_x" property="yui:name" title="x">x</a><span class="">,</span>
+                                        </span>
+                                    
+                                        <span rel="yui:property" resource="DisplayObject.html#property_y">
+                                        <a class="" href="DisplayObject.html#property_y" property="yui:name" title="y">y</a>
+                                        </span>
+                                    
+                                </code>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div rel="yui:methods" resource="#methods">
+                        <div class="section method details">
+                            <h3 id="methods">Methods</h3>
+                            <div class="content">
+                                    <div class="protected" rel="yui:method" resource="#method__goto">
+                                    <h4>
+                                        <a name="method__goto">_goto</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_goto</strong>
+                                           (
+                                                
+                                                        
+                                                         frameOrAnimation
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Moves the playhead to the specified frame number or animation.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">frameOrAnimation</span>
+                                                        &lt;<span property="yui:type">String|Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> The frame number or animation that the playhead should move to.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__normalizeCurrentFrame">
+                                    <h4>
+                                        <a name="method__normalizeCurrentFrame">_normalizeCurrentFrame</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_normalizeCurrentFrame</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Normalizes the current frame, advancing animations and dispatching callbacks as appropriate.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method__tick">
+                                    <h4>
+                                        <a name="method__tick">_tick</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">_tick</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Advances the currentFrame if paused is not true. This is called automatically when the Stage ticks.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_advance">
+                                    <h4>
+                                        <a name="method_advance">advance</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">advance</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Advances the playhead. This occurs automatically each tick by default.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_cache">
+                                    <h4>
+                                        <a name="method_cache">cache</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">cache</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Because the content of a Bitmap is already in a simple format, cache is unnecessary for Bitmap instances.
+You should not cache Bitmap instances as it can degrade performance.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_clone">
+                                    <h4>
+                                        <a name="method_clone">clone</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        Point
+                                            <strong property="yui:name">clone</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns a clone of the Point instance.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        Point
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">a clone of the Point instance.</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method_cloneProps">
+                                    <h4>
+                                        <a name="method_cloneProps">cloneProps</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">cloneProps</strong>
+                                           (
+                                                
+                                                        
+                                                         o
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">o</span>
+                                                        &lt;<span property="yui:type">Text</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"></span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_draw">
+                                    <h4>
+                                        <a name="method_draw">draw</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">draw</strong>
+                                           (
+                                                
+                                                        
+                                                         ctx
+                                                    
+                                                
+                                                        , 
+                                                         ignoreCache
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Draws the display object into the specified context ignoring it's visible, alpha, shadow, and transform.
+Returns true if the draw was handled (useful for overriding functionality).
+NOTE: This method is mainly for internal use, though it may be useful for advanced uses.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">ctx</span>
+                                                        &lt;<span property="yui:type">CanvasRenderingContext2D</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> The canvas 2D context object to draw into.</span>
+                                                        </dd>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">ignoreCache</span>
+                                                        &lt;<span property="yui:type">Boolean</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> Indicates whether the draw operation should ignore any current cache.
+For example, used for drawing the cache (to prevent it from simply drawing an existing cache back
+into itself).</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_gotoAndPlay">
+                                    <h4>
+                                        <a name="method_gotoAndPlay">gotoAndPlay</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">gotoAndPlay</strong>
+                                           (
+                                                
+                                                        
+                                                         frameOrAnimation
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets paused to false and plays the specified animation name, named frame, or frame number.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">frameOrAnimation</span>
+                                                        &lt;<span property="yui:type">String|Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> The frame number or animation name that the playhead should move to
+and begin playing.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_gotoAndStop">
+                                    <h4>
+                                        <a name="method_gotoAndStop">gotoAndStop</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">gotoAndStop</strong>
+                                           (
+                                                
+                                                        
+                                                         frameOrAnimation
+                                                    
+                                                
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Sets paused to true and seeks to the specified animation name, named frame, or frame number.
+                                        </div>
+
+                                        <div class="description">
+
+                                                <dl rel="yui:parameters">
+                                                    <dt>Parameters:</dt>
+                                                        <dd rel="yui:parameter">
+                                                        <code><span property="yui:name">frameOrAnimation</span>
+                                                        &lt;<span property="yui:type">String|Number</span>&gt;
+                                                        </code>
+                                                        <span property="yui:description"> The frame number or animation name that the playhead should move to
+and stop.</span>
+                                                        </dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="protected" rel="yui:method" resource="#method_initialize">
+                                    <h4>
+                                        <a name="method_initialize">initialize</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                         protected 
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">initialize</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Initialization method.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_isVisible">
+                                    <h4>
+                                        <a name="method_isVisible">isVisible</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        Boolean
+                                            <strong property="yui:name">isVisible</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns true or false indicating whether the display object would be visible if drawn to a canvas.
+This does not account for whether it would be visible within the boundaries of the stage.
+NOTE: This method is mainly for internal use, though it may be useful for advanced uses.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        Boolean
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">Boolean indicating whether the display object would be visible if drawn to a canvas</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_toString">
+                                    <h4>
+                                        <a name="method_toString">toString</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        String
+                                            <strong property="yui:name">toString</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Returns a string representation of this object.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        String
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo">a string representation of the instance.</dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_uncache">
+                                    <h4>
+                                        <a name="method_uncache">uncache</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">uncache</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Because the content of a Bitmap is already in a simple format, cache is unnecessary for Bitmap instances.
+You should not cache Bitmap instances as it can degrade performance.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                                    <div class="" rel="yui:method" resource="#method_updateCache">
+                                    <h4>
+                                        <a name="method_updateCache">updateCache</a></h4>
+                                    <div class="detail" >
+                                        <code>
+                                        
+                                        
+                                        
+                                        void
+                                            <strong property="yui:name">updateCache</strong>
+                                           (
+                                            )
+                                        </code>
+                                        
+                                        <div class="description" property="yui:description">
+                                            Because the content of a Bitmap is already in a simple format, cache is unnecessary for Bitmap instances.
+You should not cache Bitmap instances as it can degrade performance.
+                                        </div>
+
+                                        <div class="description">
+
+
+                                                <dl>
+                                                    <dt>Returns:
+                                                    <code property="yui:return">
+                                                        void
+                                                    </code></dt>
+                                                    <dd property="yui:returnInfo"></dd>
+                                                </dl>
+
+
+             
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div rel="yui:inheritance">                    
+                            <div class="section field inheritance" rel="yui:superclass"  resource="DisplayObject.html">
+                                <h4>Methods inherited from <a href="DisplayObject.html" property="yui:name" title="DisplayObject">DisplayObject</a>:</h4>
+                                <div class="content" rel="yui:methods">
+                                    <code>
+                                            <span rel="yui:method" resource="DisplayObject.html#method__applyFilters">                                        
+                                            <a class="protected" href="DisplayObject.html#method__applyFilters" property="yui:name" title="_applyFilters">_applyFilters</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method__testHit">                                        
+                                            <a class="protected" href="DisplayObject.html#method__testHit" property="yui:name" title="_testHit">_testHit</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_applyShadow">                                        
+                                            <a class="protected" href="DisplayObject.html#method_applyShadow" property="yui:name" title="applyShadow">applyShadow</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_cache">                                        
+                                            <a class="" href="DisplayObject.html#method_cache" property="yui:name" title="cache">cache</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_clone">                                        
+                                            <a class="" href="DisplayObject.html#method_clone" property="yui:name" title="clone">clone</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_cloneProps">                                        
+                                            <a class="protected" href="DisplayObject.html#method_cloneProps" property="yui:name" title="cloneProps">cloneProps</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_draw">                                        
+                                            <a class="" href="DisplayObject.html#method_draw" property="yui:name" title="draw">draw</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_getCacheDataURL.">                                        
+                                            <a class="" href="DisplayObject.html#method_getCacheDataURL." property="yui:name" title="getCacheDataURL.">getCacheDataURL.</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_getConcatenatedMatrix">                                        
+                                            <a class="" href="DisplayObject.html#method_getConcatenatedMatrix" property="yui:name" title="getConcatenatedMatrix">getConcatenatedMatrix</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_getStage">                                        
+                                            <a class="" href="DisplayObject.html#method_getStage" property="yui:name" title="getStage">getStage</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_globalToLocal">                                        
+                                            <a class="" href="DisplayObject.html#method_globalToLocal" property="yui:name" title="globalToLocal">globalToLocal</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_hitTest">                                        
+                                            <a class="" href="DisplayObject.html#method_hitTest" property="yui:name" title="hitTest">hitTest</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_initialize">                                        
+                                            <a class="protected" href="DisplayObject.html#method_initialize" property="yui:name" title="initialize">initialize</a><span class="protected">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_isVisible">                                        
+                                            <a class="" href="DisplayObject.html#method_isVisible" property="yui:name" title="isVisible">isVisible</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_localToGlobal">                                        
+                                            <a class="" href="DisplayObject.html#method_localToGlobal" property="yui:name" title="localToGlobal">localToGlobal</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_localToLocal">                                        
+                                            <a class="" href="DisplayObject.html#method_localToLocal" property="yui:name" title="localToLocal">localToLocal</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_setTransform">                                        
+                                            <a class="" href="DisplayObject.html#method_setTransform" property="yui:name" title="setTransform">setTransform</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_toString">                                        
+                                            <a class="" href="DisplayObject.html#method_toString" property="yui:name" title="toString">toString</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_uncache">                                        
+                                            <a class="" href="DisplayObject.html#method_uncache" property="yui:name" title="uncache">uncache</a><span class="">,</span>
+                                            </span>
+                                            <span rel="yui:method" resource="DisplayObject.html#method_updateCache">                                        
+                                            <a class="" href="DisplayObject.html#method_updateCache" property="yui:name" title="updateCache">updateCache</a>
+                                            </span>
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div rel="yui:events" resource="#events">
+
+
+                        <div rel="yui:inheritance">                    
+                        <div class="section field inheritance" rel="yui:superclass"  resource="DisplayObject.html">
+                            <h4>Events inherited from <a href="DisplayObject.html" property="yui:name" title="DisplayObject">DisplayObject</a>:</h4>
+                            <div class="content" rel="yui:events">
+                                <code>
+                                        <span rel="yui:event" resource="DisplayObject.html#event_onClick">
+                                        <a class="" href="DisplayObject.html#event_onClick" property="yui:name" title="onClick">onClick</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="DisplayObject.html#event_onDoubleClick">
+                                        <a class="" href="DisplayObject.html#event_onDoubleClick" property="yui:name" title="onDoubleClick">onDoubleClick</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="DisplayObject.html#event_onMouseOut">
+                                        <a class="" href="DisplayObject.html#event_onMouseOut" property="yui:name" title="onMouseOut">onMouseOut</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="DisplayObject.html#event_onMouseOver">
+                                        <a class="" href="DisplayObject.html#event_onMouseOver" property="yui:name" title="onMouseOver">onMouseOver</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="DisplayObject.html#event_onPress">
+                                        <a class="" href="DisplayObject.html#event_onPress" property="yui:name" title="onPress">onPress</a><span class="">,</span>
+                                        </span>
+                                                                            <span rel="yui:event" resource="DisplayObject.html#event_tick">
+                                        <a class="" href="DisplayObject.html#event_tick" property="yui:name" title="tick">tick</a><span class="">,</span>
+                                        </span>
+                                    
+                                </code>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div rel="yui:attributes" resource="#configattributes">
+
+                    </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_EaselJS.html" title="EaselJS">EaselJS</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Bitmap.html" title="Bitmap">Bitmap</a></li>
+                                <li class="selected"><a href="BitmapAnimation.html" title="BitmapAnimation">BitmapAnimation</a></li>
+                                <li class=""><a href="BoxBlurFilter.html" title="BoxBlurFilter">BoxBlurFilter</a></li>
+                                <li class=""><a href="ColorFilter.html" title="ColorFilter">ColorFilter</a></li>
+                                <li class=""><a href="ColorMatrixFilter.html" title="ColorMatrixFilter">ColorMatrixFilter</a></li>
+                                <li class=""><a href="Command.html" title="Command">Command</a></li>
+                                <li class=""><a href="Container.html" title="Container">Container</a></li>
+                                <li class=""><a href="DisplayObject.html" title="DisplayObject">DisplayObject</a></li>
+                                <li class=""><a href="DOMElement.html" title="DOMElement">DOMElement</a></li>
+                                <li class=""><a href="Filter.html" title="Filter">Filter</a></li>
+                                <li class=""><a href="Graphics.html" title="Graphics">Graphics</a></li>
+                                <li class=""><a href="Matrix2D.html" title="Matrix2D">Matrix2D</a></li>
+                                <li class=""><a href="MouseEvent.html" title="MouseEvent">MouseEvent</a></li>
+                                <li class=""><a href="Point.html" title="Point">Point</a></li>
+                                <li class=""><a href="Rectangle.html" title="Rectangle">Rectangle</a></li>
+                                <li class=""><a href="Shadow.html" title="Shadow">Shadow</a></li>
+                                <li class=""><a href="Shape.html" title="Shape">Shape</a></li>
+                                <li class=""><a href="SpriteSheet.html" title="SpriteSheet">SpriteSheet</a></li>
+                                <li class=""><a href="SpriteSheetUtils.html" title="SpriteSheetUtils">SpriteSheetUtils</a></li>
+                                <li class=""><a href="Stage.html" title="Stage">Stage</a></li>
+                                <li class=""><a href="Text.html" title="Text">Text</a></li>
+                                <li class=""><a href="Ticker.html" title="Ticker">Ticker</a></li>
+                                <li class=""><a href="Touch.html" title="Touch">Touch</a></li>
+                                <li class=""><a href="UID.html" title="UID">UID</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="Bitmap.js.html" title="Bitmap.js">Bitmap.js</a></li>
+                                <li class=""><a href="BitmapAnimation.js.html" title="BitmapAnimation.js">BitmapAnimation.js</a></li>
+                                <li class=""><a href="BoxBlurFilter.js.html" title="BoxBlurFilter.js">BoxBlurFilter.js</a></li>
+                                <li class=""><a href="ColorFilter.js.html" title="ColorFilter.js">ColorFilter.js</a></li>
+                                <li class=""><a href="ColorMatrixFilter.js.html" title="ColorMatrixFilter.js">ColorMatrixFilter.js</a></li>
+                                <li class=""><a href="Container.js.html" title="Container.js">Container.js</a></li>
+                                <li class=""><a href="DisplayObject.js.html" title="DisplayObject.js">DisplayObject.js</a></li>
+                                <li class=""><a href="DOMElement.js.html" title="DOMElement.js">DOMElement.js</a></li>
+                                <li class=""><a href="Filter.js.html" title="Filter.js">Filter.js</a></li>
+                                <li class=""><a href="Graphics.js.html" title="Graphics.js">Graphics.js</a></li>
+                                <li class=""><a href="Matrix2D.js.html" title="Matrix2D.js">Matrix2D.js</a></li>
+                                <li class=""><a href="MouseEvent.js.html" title="MouseEvent.js">MouseEvent.js</a></li>
+                                <li class=""><a href="Point.js.html" title="Point.js">Point.js</a></li>
+                                <li class=""><a href="Rectangle.js.html" title="Rectangle.js">Rectangle.js</a></li>
+                                <li class=""><a href="Shadow.js.html" title="Shadow.js">Shadow.js</a></li>
+                                <li class=""><a href="Shape.js.html" title="Shape.js">Shape.js</a></li>
+                                <li class=""><a href="SpriteSheet.js.html" title="SpriteSheet.js">SpriteSheet.js</a></li>
+                                <li class=""><a href="SpriteSheetUtils.js.html" title="SpriteSheetUtils.js">SpriteSheetUtils.js</a></li>
+                                <li class=""><a href="Stage.js.html" title="Stage.js">Stage.js</a></li>
+                                <li class=""><a href="Text.js.html" title="Text.js">Text.js</a></li>
+                                <li class=""><a href="Ticker.js.html" title="Ticker.js">Ticker.js</a></li>
+                                <li class=""><a href="Touch.js.html" title="Touch.js">Touch.js</a></li>
+                                <li class=""><a href="UID.js.html" title="UID.js">UID.js</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="propertyList" class="module">
+                        <h4>Properties</h4>
+                        <ul class="content">        
+                                <li class="protected"><a href="#property__advanceCount" title="_advanceCount">_advanceCount</a></li>
+                                <li class="protected"><a href="#property__animation" title="_animation">_animation</a></li>
+                                <li class=""><a href="#property_currentAnimation" title="currentAnimation">currentAnimation</a></li>
+                                <li class=""><a href="#property_currentAnimationFrame" title="currentAnimationFrame">currentAnimationFrame</a></li>
+                                <li class=""><a href="#property_currentFrame" title="currentFrame">currentFrame</a></li>
+                                <li class=""><a href="#property_offset" title="offset">offset</a></li>
+                                <li class=""><a href="#property_onAnimationEnd" title="onAnimationEnd">onAnimationEnd</a></li>
+                                <li class=""><a href="#property_paused" title="paused">paused</a></li>
+                                <li class=""><a href="#property_snapToPixel" title="snapToPixel">snapToPixel</a></li>
+                                <li class=""><a href="#property_spriteSheet" title="spriteSheet">spriteSheet</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="methodsList" class="module">
+                        <h4>Methods</h4>
+                        <ul class="content">        
+                                <li class="protected"><a href="#method__goto" title="_goto">_goto</a></li>
+                                <li class="protected"><a href="#method__normalizeCurrentFrame" title="_normalizeCurrentFrame">_normalizeCurrentFrame</a></li>
+                                <li class="protected"><a href="#method__tick" title="_tick">_tick</a></li>
+                                <li class=""><a href="#method_advance" title="advance">advance</a></li>
+                                <li class=""><a href="#method_cache" title="cache">cache</a></li>
+                                <li class=""><a href="#method_clone" title="clone">clone</a></li>
+                                <li class="protected"><a href="#method_cloneProps" title="cloneProps">cloneProps</a></li>
+                                <li class=""><a href="#method_draw" title="draw">draw</a></li>
+                                <li class=""><a href="#method_gotoAndPlay" title="gotoAndPlay">gotoAndPlay</a></li>
+                                <li class=""><a href="#method_gotoAndStop" title="gotoAndStop">gotoAndStop</a></li>
+                                <li class="protected"><a href="#method_initialize" title="initialize">initialize</a></li>
+                                <li class=""><a href="#method_isVisible" title="isVisible">isVisible</a></li>
+                                <li class=""><a href="#method_toString" title="toString">toString</a></li>
+                                <li class=""><a href="#method_uncache" title="uncache">uncache</a></li>
+                                <li class=""><a href="#method_updateCache" title="updateCache">updateCache</a></li>
+                        </ul>
+                    </div>
+
+
+
+            </div>
+		</div>
+	</div>
+	
+	<!--footer-->
+	<!--
+	<div id="ft">
+        <hr />
+	</div>
+	-->
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "BitmapAnimation.html#method_advance", "access": "", "host": "BitmapAnimation", "type": "method", "name": "advance"}, {"url": "BitmapAnimation.html#property__advanceCount", "access": "protected", "host": "BitmapAnimation", "type": "property", "name": "_advanceCount"}, {"url": "BitmapAnimation.html#property__animation", "access": "protected", "host": "BitmapAnimation", "type": "property", "name": "_animation"}, {"url": "Bitmap.html#method_cache", "access": "", "host": "Bitmap", "type": "method", "name": "cache"}, {"url": "BitmapAnimation.html#method_cache", "access": "", "host": "BitmapAnimation", "type": "method", "name": "cache"}, {"url": "Bitmap.html#method_clone", "access": "", "host": "Bitmap", "type": "method", "name": "clone"}, {"url": "BitmapAnimation.html#method_clone", "access": "", "host": "BitmapAnimation", "type": "method", "name": "clone"}, {"url": "BitmapAnimation.html#method_cloneProps", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "cloneProps"}, {"url": "BitmapAnimation.html#property_currentAnimation", "access": "", "host": "BitmapAnimation", "type": "property", "name": "currentAnimation"}, {"url": "BitmapAnimation.html#property_currentAnimationFrame", "access": "", "host": "BitmapAnimation", "type": "property", "name": "currentAnimationFrame"}, {"url": "BitmapAnimation.html#property_currentFrame", "access": "", "host": "BitmapAnimation", "type": "property", "name": "currentFrame"}, {"url": "Bitmap.html#method_draw", "access": "", "host": "Bitmap", "type": "method", "name": "draw"}, {"url": "BitmapAnimation.html#method_draw", "access": "", "host": "BitmapAnimation", "type": "method", "name": "draw"}, {"url": "BitmapAnimation.html#method__goto", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "_goto"}, {"url": "BitmapAnimation.html#method_gotoAndPlay", "access": "", "host": "BitmapAnimation", "type": "method", "name": "gotoAndPlay"}, {"url": "BitmapAnimation.html#method_gotoAndStop", "access": "", "host": "BitmapAnimation", "type": "method", "name": "gotoAndStop"}, {"url": "Bitmap.html#property_image", "access": "", "host": "Bitmap", "type": "property", "name": "image"}, {"url": "Bitmap.html#method_initialize", "access": "protected", "host": "Bitmap", "type": "method", "name": "initialize"}, {"url": "BitmapAnimation.html#method_initialize", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "initialize"}, {"url": "Bitmap.html#method_isVisible", "access": "", "host": "Bitmap", "type": "method", "name": "isVisible"}, {"url": "BitmapAnimation.html#method_isVisible", "access": "", "host": "BitmapAnimation", "type": "method", "name": "isVisible"}, {"url": "BitmapAnimation.html#method__normalizeCurrentFrame", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "_normalizeCurrentFrame"}, {"url": "BitmapAnimation.html#property_offset", "access": "", "host": "BitmapAnimation", "type": "property", "name": "offset"}, {"url": "BitmapAnimation.html#property_onAnimationEnd", "access": "", "host": "BitmapAnimation", "type": "property", "name": "onAnimationEnd"}, {"url": "BitmapAnimation.html#property_paused", "access": "", "host": "BitmapAnimation", "type": "property", "name": "paused"}, {"url": "Bitmap.html#property_snapToPixel", "access": "", "host": "Bitmap", "type": "property", "name": "snapToPixel"}, {"url": "BitmapAnimation.html#property_snapToPixel", "access": "", "host": "BitmapAnimation", "type": "property", "name": "snapToPixel"}, {"url": "BitmapAnimation.html#property_spriteSheet", "access": "", "host": "BitmapAnimation", "type": "property", "name": "spriteSheet"}, {"url": "BitmapAnimation.html#method__tick", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "_tick"}, {"url": "Bitmap.html#method_toString", "access": "", "host": "Bitmap", "type": "method", "name": "toString"}, {"url": "BitmapAnimation.html#method_toString", "access": "", "host": "BitmapAnimation", "type": "method", "name": "toString"}, {"url": "Bitmap.html#method_uncache", "access": "", "host": "Bitmap", "type": "method", "name": "uncache"}, {"url": "BitmapAnimation.html#method_uncache", "access": "", "host": "BitmapAnimation", "type": "method", "name": "uncache"}, {"url": "Bitmap.html#method_updateCache", "access": "", "host": "Bitmap", "type": "method", "name": "updateCache"}, {"url": "BitmapAnimation.html#method_updateCache", "access": "", "host": "BitmapAnimation", "type": "method", "name": "updateCache"}];
+</script>
+</body>
+</html>

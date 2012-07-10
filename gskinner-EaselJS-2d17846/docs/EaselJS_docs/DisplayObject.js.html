@@ -1,0 +1,855 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>EaselJS API Documentation</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1322353213.25" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1322353213.25" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1322353213.25"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1322353213.25"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://easeljs.com/" title="EaselJS">EaselJS</a></h1>
+        <h3>EaselJS&nbsp; <span class="subtitle">0.4</span></h3>
+        <a href="./index.html" title="EaselJS">EaselJS</a> 
+            &gt; <a href="./module_easeljs.html" title="EaselJS">EaselJS</a>
+                
+                 &gt; DisplayObject.js (source view) 
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                    <div id="srcout">
+                        <style>
+                            #doc3 .classopts { display:none; }
+                        </style>
+<div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm">* DisplayObject by Grant Skinner. Dec 5, 2010</span>
+<span class="cm">* Visit http://easeljs.com/ for documentation, updates and examples.</span>
+<span class="cm">*</span>
+<span class="cm">*</span>
+<span class="cm">* Copyright (c) 2010 Grant Skinner</span>
+<span class="cm">*</span>
+<span class="cm">* Permission is hereby granted, free of charge, to any person</span>
+<span class="cm">* obtaining a copy of this software and associated documentation</span>
+<span class="cm">* files (the &quot;Software&quot;), to deal in the Software without</span>
+<span class="cm">* restriction, including without limitation the rights to use,</span>
+<span class="cm">* copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="cm">* copies of the Software, and to permit persons to whom the</span>
+<span class="cm">* Software is furnished to do so, subject to the following</span>
+<span class="cm">* conditions:</span>
+<span class="cm">*</span>
+<span class="cm">* The above copyright notice and this permission notice shall be</span>
+<span class="cm">* included in all copies or substantial portions of the Software.</span>
+<span class="cm">*</span>
+<span class="cm">* THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,</span>
+<span class="cm">* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES</span>
+<span class="cm">* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND</span>
+<span class="cm">* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT</span>
+<span class="cm">* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,</span>
+<span class="cm">* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING</span>
+<span class="cm">* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR</span>
+<span class="cm">* OTHER DEALINGS IN THE SOFTWARE.</span>
+<span class="cm">*/</span>
+
+<span class="cm">/**</span>
+<span class="cm">* The Easel Javascript library provides a retained graphics mode for canvas</span>
+<span class="cm">* including a full, hierarchical display list, a core interaction model, and</span>
+<span class="cm">* helper classes to make working with Canvas much easier.</span>
+<span class="cm">* @module EaselJS</span>
+<span class="cm">**/</span>
+
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nb">window</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="cm">/**</span>
+<span class="cm">* DisplayObject is an abstract class that should not be constructed directly. Instead construct subclasses such as</span>
+<span class="cm">* Sprite, Bitmap, and Shape. DisplayObject is the base class for all display classes in the CanvasDisplay library.</span>
+<span class="cm">* It defines the core properties and methods that are shared between all display objects.</span>
+<span class="cm">* @class DisplayObject</span>
+<span class="cm">* @constructor</span>
+<span class="cm">**/</span>
+<span class="kd">var</span> <span class="nx">DisplayObject</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">initialize</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Suppresses errors generated when using features like hitTest, onPress/onClick, and getObjectsUnderPoint with cross</span>
+<span class="cm">	 * domain content</span>
+<span class="cm">	 * @property suppressCrossDomainErrors</span>
+<span class="cm">	 * @static</span>
+<span class="cm">	 * @type Boolean</span>
+<span class="cm">	 * @default false</span>
+<span class="cm">	 **/</span>
+	<span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">suppressCrossDomainErrors</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * @property _hitTestCanvas</span>
+<span class="cm">	 * @type HTMLCanvasElement</span>
+<span class="cm">	 * @static</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	 **/</span>
+	<span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">_hitTestCanvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;canvas&quot;</span><span class="p">);</span>
+	<span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">_hitTestCanvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">_hitTestCanvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * @property _hitTestContext</span>
+<span class="cm">	 * @type CanvasRenderingContext2D</span>
+<span class="cm">	 * @static</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	 **/</span>
+	<span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">_hitTestContext</span> <span class="o">=</span> <span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">_hitTestCanvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span>
+
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The alpha (transparency) for this display object. 0 is fully transparent, 1 is fully opaque.</span>
+<span class="cm">	 * @property alpha</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 1</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * If a cache is active, this returns the canvas that holds the cached version of this display object. See cache()</span>
+<span class="cm">	 * for more information. READ-ONLY.</span>
+<span class="cm">	 * @property cacheCanvas</span>
+<span class="cm">	 * @type HTMLCanvasElement</span>
+<span class="cm">	 * @default null</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">cacheCanvas</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Unique ID for this display object. Makes display objects easier for some uses.</span>
+<span class="cm">	 * @property id</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default -1</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Indicates whether to include this object when running Stage.getObjectsUnderPoint(). Setting this to true for</span>
+<span class="cm">	 * Sprites will cause the Sprite to be returned (not its children) regardless of whether it&#39;s mouseChildren property</span>
+<span class="cm">	 * is true.</span>
+<span class="cm">	 * @property mouseEnabled</span>
+<span class="cm">	 * @type Boolean</span>
+<span class="cm">	 * @default true</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">mouseEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * An optional name for this display object. Included in toString(). Useful for debugging.</span>
+<span class="cm">	 * @property name</span>
+<span class="cm">	 * @type String</span>
+<span class="cm">	 * @default null</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * A reference to the Sprite or Stage object that contains this display object, or null if it has not been added to</span>
+<span class="cm">	 * one. READ-ONLY.</span>
+<span class="cm">	 * @property parent</span>
+<span class="cm">	 * @final</span>
+<span class="cm">	 * @type DisplayObject</span>
+<span class="cm">	 * @default null</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">parent</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The x offset for this display object&#39;s registration point. For example, to make a 100x100px Bitmap rotate around</span>
+<span class="cm">	 * it&#39;s center, you would set regX and regY to 50.</span>
+<span class="cm">	 * @property regX</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 0</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">regX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The y offset for this display object&#39;s registration point. For example, to make a 100x100px Bitmap rotate around</span>
+<span class="cm">	 * it&#39;s center, you would set regX and regY to 50.</span>
+<span class="cm">	 * @property regY</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 0</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">regY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The rotation in degrees for this display object.</span>
+<span class="cm">	 * @property rotation</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 0</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The factor to stretch this display object horizontally. For example, setting scaleX to 2 will stretch the display</span>
+<span class="cm">	 * object to twice it&#39;s nominal width.</span>
+<span class="cm">	 * @property scaleX</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 1</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The factor to stretch this display object vertically. For example, setting scaleY to 0.5 will stretch the display</span>
+<span class="cm">	 * object to half it&#39;s nominal height.</span>
+<span class="cm">	 * @property scaleY</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 1</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The factor to skew this display object horizontally.</span>
+<span class="cm">	 * @property skewX</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 0</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">skewX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The factor to skew this display object vertically.</span>
+<span class="cm">	 * @property skewY</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 0</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">skewY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * A shadow object that defines the shadow to render on this display object. Set to null to remove a shadow. If</span>
+<span class="cm">	 * null, this property is inherited from the parent container.</span>
+<span class="cm">	 * @property shadow</span>
+<span class="cm">	 * @type Shadow</span>
+<span class="cm">	 * @default null</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">shadow</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Indicates whether this display object should be rendered to the canvas and included when running</span>
+<span class="cm">	 * Stage.getObjectsUnderPoint().</span>
+<span class="cm">	 * @property visible</span>
+<span class="cm">	 * @type Boolean</span>
+<span class="cm">	 * @default true</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The x (horizontal) position of the display object, relative to its parent.</span>
+<span class="cm">	 * @property x</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 0</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="cm">/** The y (vertical) position of the display object, relative to its parent.</span>
+<span class="cm">	 * @property y</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 0</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The composite operation indicates how the pixels of this display object will be composited with the elements</span>
+<span class="cm">	 * behind it. If null, this property is inherited from the parent container. For more information, read the</span>
+<span class="cm">	 * &lt;a href=&quot;http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#compositing&quot;&gt;</span>
+<span class="cm">	 * whatwg spec on compositing&lt;/a&gt;.</span>
+<span class="cm">	 * @property compositeOperation</span>
+<span class="cm">	 * @type String</span>
+<span class="cm">	 * @default null</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">compositeOperation</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Indicates whether the display object should have it&#39;s x &amp; y position rounded prior to drawing it to stage.</span>
+<span class="cm">	 * This only applies if the enclosing stage has snapPixelsEnabled set to true, and the display object&#39;s composite</span>
+<span class="cm">	 * transform does not include any scaling, rotation, or skewing. The snapToPixel property is true by default for</span>
+<span class="cm">	 * Bitmap and BitmapAnimation instances, and false for all other display objects.</span>
+<span class="cm">	 * @property snapToPixel</span>
+<span class="cm">	 * @type Boolean</span>
+<span class="cm">	 * @default false</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">snapToPixel</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The onPress callback is called when the user presses down on their mouse over this display object. The handler</span>
+<span class="cm">	 * is passed a single param containing the corresponding MouseEvent instance. You can subscribe to the onMouseMove</span>
+<span class="cm">	 * and onMouseUp callbacks of the event object to receive these events until the user releases the mouse button.</span>
+<span class="cm">	 * If an onPress handler is set on a container, it will receive the event if any of its children are clicked.</span>
+<span class="cm">	 * @event onPress</span>
+<span class="cm">	 * @param {MouseEvent} event MouseEvent with information about the event.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">onPress</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The onClick callback is called when the user presses down on and then releases the mouse button over this</span>
+<span class="cm">	 * display object. The handler is passed a single param containing the corresponding MouseEvent instance. If an</span>
+<span class="cm">	 * onClick handler is set on a container, it will receive the event if any of its children are clicked.</span>
+<span class="cm">	 * @event onClick</span>
+<span class="cm">	 * @param {MouseEvent} event MouseEvent with information about the event.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">onClick</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The onDoubleClick callback is called when the user double clicks over this display object. The handler is</span>
+<span class="cm">	 * passed a single param containing the corresponding MouseEvent instance. If an onDoubleClick handler is set</span>
+<span class="cm">	 * on a container, it will receive the event if any of its children are clicked.</span>
+<span class="cm">	 * @event onDoubleClick</span>
+<span class="cm">	 * @param {MouseEvent} event MouseEvent with information about the event.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">onDoubleClick</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The onMouseOver callback is called when the user rolls over the display object. You must enable this event using</span>
+<span class="cm">	 * stage.enableMouseOver(). The handler is passed a single param containing the corresponding MouseEvent instance.</span>
+<span class="cm">	 * @event onMouseOver</span>
+<span class="cm">	 * @param {MouseEvent} event MouseEvent with information about the event.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">onMouseOver</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The onMouseOut callback is called when the user rolls off of the display object. You must enable this event using</span>
+<span class="cm">	 * stage.enableMouseOver(). The handler is passed a single param containing the corresponding MouseEvent instance.</span>
+<span class="cm">	 * @event onMouseOut</span>
+<span class="cm">	 * @param {MouseEvent} event MouseEvent with information about the event.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">onMouseOut</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * The tick callback is called on each display object on stage whenever the stage updates.</span>
+<span class="cm">	 * This occurs immediately before the rendering (draw) pass.</span>
+<span class="cm">	 * @event tick</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">tick</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * An array of Filter objects to apply to this display object. Filters are only applied / updated when cache() or</span>
+<span class="cm">	 * updateCache() is called on the display object, and only apply to the area that is cached.</span>
+<span class="cm">	 * @property filters</span>
+<span class="cm">	 * @type Array[Filter]</span>
+<span class="cm">	 * @default null</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">filters</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	* Returns an ID number that uniquely identifies the current cache for this display object.</span>
+<span class="cm">	* This can be used to determine if the cache has changed since a previous check.</span>
+<span class="cm">	* @property cacheID</span>
+<span class="cm">	* @type Number</span>
+<span class="cm">	* @default 0</span>
+<span class="cm">	*/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">cacheID</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">// private properties:</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * @property _cacheOffsetX</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 0</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">_cacheOffsetX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * @property _cacheOffsetY</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	 * @type Number</span>
+<span class="cm">	 * @default 0</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">_cacheOffsetY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	* @property _cacheDataURLID</span>
+<span class="cm">	* @protected</span>
+<span class="cm">	* @type Number</span>
+<span class="cm">	* @default 0</span>
+<span class="cm">	*/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">_cacheDataURLID</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* @property _cacheDataURL</span>
+<span class="cm">	* @protected</span>
+<span class="cm">	* @type String</span>
+<span class="cm">	* @default null</span>
+<span class="cm">	*/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">_cacheDataURL</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * @property _matrix</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	 * @type Matrix2D</span>
+<span class="cm">	 * @default null</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">_matrix</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="c1">// constructor:</span>
+	<span class="c1">// separated so it can be easily addressed in subclasses:</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Initialization method.</span>
+<span class="cm">	 * @method initialize</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	*/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">initialize</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">UID</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_matrix</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Matrix2D</span><span class="p">();</span>
+	<span class="p">}</span>
+
+<span class="c1">// public methods:</span>
+	<span class="cm">/**</span>
+<span class="cm">	 * Returns true or false indicating whether the display object would be visible if drawn to a canvas.</span>
+<span class="cm">	 * This does not account for whether it would be visible within the boundaries of the stage.</span>
+<span class="cm">	 * NOTE: This method is mainly for internal use, though it may be useful for advanced uses.</span>
+<span class="cm">	 * @method isVisible</span>
+<span class="cm">	 * @return {Boolean} Boolean indicating whether the display object would be visible if drawn to a canvas</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">isVisible</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">visible</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Draws the display object into the specified context ignoring it&#39;s visible, alpha, shadow, and transform.</span>
+<span class="cm">	 * Returns true if the draw was handled (useful for overriding functionality).</span>
+<span class="cm">	 * NOTE: This method is mainly for internal use, though it may be useful for advanced uses.</span>
+<span class="cm">	 * @method draw</span>
+<span class="cm">	 * @param {CanvasRenderingContext2D} ctx The canvas 2D context object to draw into.</span>
+<span class="cm">	 * @param {Boolean} ignoreCache Indicates whether the draw operation should ignore any current cache.</span>
+<span class="cm">	 * For example, used for drawing the cache (to prevent it from simply drawing an existing cache back</span>
+<span class="cm">	 * into itself).</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">draw</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">ignoreCache</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">ignoreCache</span> <span class="o">||</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> <span class="p">}</span>
+		<span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cacheOffsetX</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cacheOffsetY</span><span class="p">);</span>
+		<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Draws the display object into a new canvas, which is then used for subsequent draws. For complex content</span>
+<span class="cm">	 * that does not change frequently (ex. a Sprite with many children that do not move, or a complex vector Shape),</span>
+<span class="cm">	 * this can provide for much faster rendering because the content does not need to be re-rendered each tick. The</span>
+<span class="cm">	 * cached display object can be moved, rotated, faded, etc freely, however if it&#39;s content changes, you must manually</span>
+<span class="cm">	 * update the cache by calling updateCache() or cache() again. You must specify the cache area via the x, y, w,</span>
+<span class="cm">	 * and h parameters. This defines the rectangle that will be rendered and cached using this display object&#39;s</span>
+<span class="cm">	 * coordinates. For example if you defined a Shape that drew a circle at 0, 0 with a radius of 25, you could call</span>
+<span class="cm">	 * myShape.cache(-25, -25, 50, 50) to cache the full shape.</span>
+<span class="cm">	 * @method cache</span>
+<span class="cm">	 * @param {Number} x The x coordinate origin for the cache region.</span>
+<span class="cm">	 * @param {Number} y The y coordinate origin for the cache region.</span>
+<span class="cm">	 * @param {Number} width The width of the cache region.</span>
+<span class="cm">	 * @param {Number} height The height of the cache region.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">cache</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// draw to canvas.</span>
+		<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;canvas&quot;</span><span class="p">);</span> <span class="p">}</span>
+		<span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+		<span class="nx">ctx</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nx">height</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// because some browsers don&#39;t properly clear if the width/height remain the same.</span>
+		<span class="nx">ctx</span><span class="p">.</span><span class="nx">setTransform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="nx">x</span><span class="p">,</span> <span class="o">-</span><span class="nx">y</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_matrix</span><span class="p">.</span><span class="nx">reinitialize</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="nx">x</span><span class="p">,</span><span class="o">-</span><span class="nx">y</span><span class="p">));</span> <span class="c1">// containers require the matrix to work from</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_cacheOffsetX</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_cacheOffsetY</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_applyFilters</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">cacheID</span><span class="o">++</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Redraws the display object to its cache. Calling updateCache without an active cache will throw an error.</span>
+<span class="cm">	 * If compositeOperation is null the current cache will be cleared prior to drawing. Otherwise the display object</span>
+<span class="cm">	 * will be drawn over the existing cache using the specified compositeOperation.</span>
+<span class="cm">	 * @method updateCache</span>
+<span class="cm">	 * @param {String} compositeOperation The compositeOperation to use, or null to clear the cache and redraw it.</span>
+<span class="cm">	 * &lt;a href=&quot;http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#compositing&quot;&gt;</span>
+<span class="cm">	 * whatwg spec on compositing&lt;/a&gt;.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">updateCache</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">compositeOperation</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">&quot;cache() must be called before updateCache()&quot;</span><span class="p">;</span> <span class="p">}</span>
+		<span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span>
+		<span class="nx">ctx</span><span class="p">.</span><span class="nx">setTransform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">_cacheOffsetX</span><span class="p">,</span> <span class="o">-</span><span class="k">this</span><span class="p">.</span><span class="nx">_cacheOffsetY</span><span class="p">);</span>
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">compositeOperation</span><span class="p">)</span> <span class="p">{</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">width</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">height</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">globalCompositeOperation</span> <span class="o">=</span> <span class="nx">compositeOperation</span><span class="p">;</span> <span class="p">}</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">compositeOperation</span><span class="p">)</span> <span class="p">{</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">globalCompositeOperation</span> <span class="o">=</span> <span class="s2">&quot;source-over&quot;</span><span class="p">;</span> <span class="p">}</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_applyFilters</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">cacheID</span><span class="o">++</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Clears the current cache. See cache() for more information.</span>
+<span class="cm">	 * @method uncache</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">uncache</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_cacheDataURL</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">_cacheOffsetX</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cacheOffsetY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	* Returns a data URL for the cache, or null if this display object is not cached.</span>
+<span class="cm">	* Uses cacheID to ensure a new data URL is not generated if the cache has not changed.</span>
+<span class="cm">	* @method getCacheDataURL.</span>
+<span class="cm">	**/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">getCacheDataURL</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span> <span class="p">}</span>
+		<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheID</span> <span class="o">!=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cacheDataURLID</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cacheDataURL</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">toDataURL</span><span class="p">();</span> <span class="p">}</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_cacheDataURL</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Returns the stage that this display object will be rendered on, or null if it has not been added to one.</span>
+<span class="cm">	 * @method getStage</span>
+<span class="cm">	 * @return {Stage} The Stage instance that the display object is a descendent of. null if the DisplayObject has not</span>
+<span class="cm">	 * been added to a Stage.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">getStage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		<span class="k">while</span> <span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">parent</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">o</span> <span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">parent</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">o</span> <span class="k">instanceof</span> <span class="nx">Stage</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">o</span><span class="p">;</span> <span class="p">}</span>
+		<span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Transforms the specified x and y position from the coordinate space of the display object</span>
+<span class="cm">	 * to the global (stage) coordinate space. For example, this could be used to position an HTML label</span>
+<span class="cm">	 * over a specific point on a nested display object. Returns a Point instance with x and y properties</span>
+<span class="cm">	 * correlating to the transformed coordinates on the stage.</span>
+<span class="cm">	 * @method localToGlobal</span>
+<span class="cm">	 * @param {Number} x The x position in the source display object to transform.</span>
+<span class="cm">	 * @param {Number} y The y position in the source display object to transform.</span>
+<span class="cm">	 * @return {Point} A Point instance with x and y properties correlating to the transformed coordinates</span>
+<span class="cm">	 * on the stage.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">localToGlobal</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">mtx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getConcatenatedMatrix</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_matrix</span><span class="p">);</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">mtx</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span> <span class="p">}</span>
+		<span class="nx">mtx</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">mtx</span><span class="p">.</span><span class="nx">tx</span><span class="p">,</span> <span class="nx">mtx</span><span class="p">.</span><span class="nx">ty</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Transforms the specified x and y position from the global (stage) coordinate space to the</span>
+<span class="cm">	 * coordinate space of the display object. For example, this could be used to determine</span>
+<span class="cm">	 * the current mouse position within the display object. Returns a Point instance with x and y properties</span>
+<span class="cm">	 * correlating to the transformed position in the display object&#39;s coordinate space.</span>
+<span class="cm">	 * @method globalToLocal</span>
+<span class="cm">	 * @param {Number} x The x position on the stage to transform.</span>
+<span class="cm">	 * @param {Number} y The y position on the stage to transform.</span>
+<span class="cm">	 * @return {Point} A Point instance with x and y properties correlating to the transformed position in the</span>
+<span class="cm">	 * display object&#39;s coordinate space.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">globalToLocal</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">mtx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getConcatenatedMatrix</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_matrix</span><span class="p">);</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">mtx</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span> <span class="p">}</span>
+		<span class="nx">mtx</span><span class="p">.</span><span class="nx">invert</span><span class="p">();</span>
+		<span class="nx">mtx</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">mtx</span><span class="p">.</span><span class="nx">tx</span><span class="p">,</span> <span class="nx">mtx</span><span class="p">.</span><span class="nx">ty</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Transforms the specified x and y position from the coordinate space of this display object to the</span>
+<span class="cm">	 * coordinate space of the target display object. Returns a Point instance with x and y properties</span>
+<span class="cm">	 * correlating to the transformed position in the target&#39;s coordinate space. Effectively the same as calling</span>
+<span class="cm">	 * var pt = this.localToGlobal(x, y); pt = target.globalToLocal(pt.x, pt.y);</span>
+<span class="cm">	 * @method localToLocal</span>
+<span class="cm">	 * @param {Number} x The x position in the source display object to transform.</span>
+<span class="cm">	 * @param {Number} y The y position on the stage to transform.</span>
+<span class="cm">	 * @param {DisplayObject} target The target display object to which the coordinates will be transformed.</span>
+<span class="cm">	 * @return {Point} Returns a Point instance with x and y properties correlating to the transformed position</span>
+<span class="cm">	 * in the target&#39;s coordinate space.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">localToLocal</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">pt</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">localToGlobal</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+		<span class="k">return</span> <span class="nx">target</span><span class="p">.</span><span class="nx">globalToLocal</span><span class="p">(</span><span class="nx">pt</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Shortcut method to quickly set the transform properties on the display object. All parameters are optional.</span>
+<span class="cm">	 * Omitted parameters will have the default value set (ex. 0 for x/y, 1 for scaleX/Y).</span>
+<span class="cm">	 * @method setTransform</span>
+<span class="cm">	 * @param {Number} x</span>
+<span class="cm">	 * @param {Number} y</span>
+<span class="cm">	 * @param {Number} scaleX</span>
+<span class="cm">	 * @param {Number} scaleY</span>
+<span class="cm">	 * @param {Number} rotation</span>
+<span class="cm">	 * @param {Number} skewX</span>
+<span class="cm">	 * @param {Number} skewY</span>
+<span class="cm">	 * @param {Number} regX</span>
+<span class="cm">	 * @param {Number} regY</span>
+<span class="cm">	*/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">setTransform</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">,</span> <span class="nx">rotation</span><span class="p">,</span> <span class="nx">skewX</span><span class="p">,</span> <span class="nx">skewY</span><span class="p">,</span> <span class="nx">regX</span><span class="p">,</span> <span class="nx">regY</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">=</span> <span class="nx">scaleX</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="nx">scaleX</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">scaleY</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="nx">scaleY</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">rotation</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">skewX</span> <span class="o">=</span> <span class="nx">skewX</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">skewY</span> <span class="o">=</span> <span class="nx">skewY</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">regX</span> <span class="o">=</span> <span class="nx">regX</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">regY</span> <span class="o">=</span> <span class="nx">regY</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Generates a concatenated Matrix2D object representing the combined transform of</span>
+<span class="cm">	 * the display object and all of its parent Containers up to the highest level ancestor</span>
+<span class="cm">	 * (usually the stage). This can be used to transform positions between coordinate spaces,</span>
+<span class="cm">	 * such as with localToGlobal and globalToLocal.</span>
+<span class="cm">	 * @method getConcatenatedMatrix</span>
+<span class="cm">	 * @param {Matrix2D} mtx Optional. A Matrix2D object to populate with the calculated values. If null, a new</span>
+<span class="cm">	 * Matrix object is returned.</span>
+<span class="cm">	 * @return {Matrix2D} a concatenated Matrix2D object representing the combined transform of</span>
+<span class="cm">	 * the display object and all of its parent Containers up to the highest level ancestor (usually the stage).</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">getConcatenatedMatrix</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">mtx</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">mtx</span><span class="p">)</span> <span class="p">{</span> <span class="nx">mtx</span><span class="p">.</span><span class="nx">identity</span><span class="p">();</span> <span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span> <span class="nx">mtx</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Matrix2D</span><span class="p">();</span> <span class="p">}</span>
+		<span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		<span class="k">while</span> <span class="p">(</span><span class="nx">target</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">mtx</span><span class="p">.</span><span class="nx">prependTransform</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">scaleY</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">rotation</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">skewX</span><span class="p">,</span>
+									<span class="nx">target</span><span class="p">.</span><span class="nx">skewY</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">regX</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">regY</span><span class="p">);</span>
+			<span class="nx">mtx</span><span class="p">.</span><span class="nx">prependProperties</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">alpha</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">shadow</span><span class="p">,</span> <span class="nx">target</span><span class="p">.</span><span class="nx">compositeOperation</span><span class="p">);</span>
+			<span class="nx">target</span> <span class="o">=</span> <span class="nx">target</span><span class="p">.</span><span class="nx">parent</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="nx">mtx</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Tests whether the display object intersects the specified local point (ie. draws a pixel with alpha &gt; 0 at</span>
+<span class="cm">	 * the specified position). This ignores the alpha, shadow and compositeOperation of the display object, and all</span>
+<span class="cm">	 * transform properties including regX/Y.</span>
+<span class="cm">	 * @method hitTest</span>
+<span class="cm">	 * @param {Number} x The x position to check in the display object&#39;s local coordinates.</span>
+<span class="cm">	 * @param {Number} y The y position to check in the display object&#39;s local coordinates.</span>
+<span class="cm">	 * @return {Boolean} A Boolean indicting whether a visible portion of the DisplayObject intersect the specified</span>
+<span class="cm">	 * local Point.</span>
+<span class="cm">	*/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">hitTest</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">_hitTestContext</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">_hitTestCanvas</span><span class="p">;</span>
+
+		<span class="nx">ctx</span><span class="p">.</span><span class="nx">setTransform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="nx">x</span><span class="p">,</span> <span class="o">-</span><span class="nx">y</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">ctx</span><span class="p">);</span>
+
+		<span class="kd">var</span> <span class="nx">hit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_testHit</span><span class="p">(</span><span class="nx">ctx</span><span class="p">);</span>
+
+		<span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+		<span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="k">return</span> <span class="nx">hit</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Returns a clone of this DisplayObject. Some properties that are specific to this instance&#39;s current context are</span>
+<span class="cm">	 * reverted to their defaults (for example .parent).</span>
+<span class="cm">	 * @method clone</span>
+<span class="cm">	 @return {DisplayObject} A clone of the current DisplayObject instance.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">clone</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DisplayObject</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">cloneProps</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+		<span class="k">return</span> <span class="nx">o</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * Returns a string representation of this object.</span>
+<span class="cm">	 * @method toString</span>
+<span class="cm">	 * @return {String} a string representation of the instance.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s2">&quot;[DisplayObject (name=&quot;</span><span class="o">+</span>  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span><span class="s2">&quot;)]&quot;</span><span class="p">;</span>
+	<span class="p">}</span>
+
+<span class="c1">// private methods:</span>
+
+	<span class="c1">// separated so it can be used more easily in subclasses:</span>
+	<span class="cm">/**</span>
+<span class="cm">	 * @method cloneProps</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	 * @param {DisplayObject} o The DisplayObject instance which will have properties from the current DisplayObject</span>
+<span class="cm">	 * instance copied into.</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">cloneProps</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">alpha</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">regX</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">regX</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">regY</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">regY</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">scaleX</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">scaleY</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">shadow</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">shadow</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">skewX</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">skewX</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">skewY</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">skewY</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">x</span>  <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">mouseEnabled</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">mouseEnabled</span><span class="p">;</span>
+		<span class="nx">o</span><span class="p">.</span><span class="nx">compositeOperation</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">compositeOperation</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">o</span><span class="p">.</span><span class="nx">cacheCanvas</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+			<span class="nx">o</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">).</span><span class="nx">putImageData</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">).</span><span class="nx">getImageData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">height</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * @method applyShadow</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	 * @param {CanvasRenderingContext2D} ctx</span>
+<span class="cm">	 * @param {Shadow} shadow</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">applyShadow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">shadow</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">shadow</span> <span class="o">=</span> <span class="nx">shadow</span> <span class="o">||</span> <span class="nx">Shadow</span><span class="p">.</span><span class="nx">identity</span><span class="p">;</span>
+		<span class="nx">ctx</span><span class="p">.</span><span class="nx">shadowColor</span> <span class="o">=</span> <span class="nx">shadow</span><span class="p">.</span><span class="nx">color</span><span class="p">;</span>
+		<span class="nx">ctx</span><span class="p">.</span><span class="nx">shadowOffsetX</span> <span class="o">=</span> <span class="nx">shadow</span><span class="p">.</span><span class="nx">offsetX</span><span class="p">;</span>
+		<span class="nx">ctx</span><span class="p">.</span><span class="nx">shadowOffsetY</span> <span class="o">=</span> <span class="nx">shadow</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">;</span>
+		<span class="nx">ctx</span><span class="p">.</span><span class="nx">shadowBlur</span> <span class="o">=</span> <span class="nx">shadow</span><span class="p">.</span><span class="nx">blur</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * @method _testHit</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	 * @param {CanvasRenderingContext2D} ctx</span>
+<span class="cm">	 * @return {Boolean}</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">_testHit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">try</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">hit</span> <span class="o">=</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">getImageData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">).</span><span class="nx">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">DisplayObject</span><span class="p">.</span><span class="nx">suppressCrossDomainErrors</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">throw</span> <span class="s2">&quot;An error has occured. This is most likely due to security restrictions on reading canvas pixel &quot;</span> <span class="o">+</span>
+				<span class="s2">&quot;data with local or cross-domain images.&quot;</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="nx">hit</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="cm">/**</span>
+<span class="cm">	 * @method _applyFilters</span>
+<span class="cm">	 * @protected</span>
+<span class="cm">	 **/</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">_applyFilters</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">filters</span> <span class="o">||</span> <span class="k">this</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+		<span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">w</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">h</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cacheCanvas</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">filters</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">applyFilter</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">DisplayObject</span> <span class="o">=</span> <span class="nx">DisplayObject</span><span class="p">;</span>
+<span class="p">}(</span><span class="nb">window</span><span class="p">));</span>
+</pre></div>
+                    </div>
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class="selected"><a href="module_EaselJS.html" title="EaselJS">EaselJS</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="Bitmap.html" title="Bitmap">Bitmap</a></li>
+                                <li class=""><a href="BitmapAnimation.html" title="BitmapAnimation">BitmapAnimation</a></li>
+                                <li class=""><a href="BoxBlurFilter.html" title="BoxBlurFilter">BoxBlurFilter</a></li>
+                                <li class=""><a href="ColorFilter.html" title="ColorFilter">ColorFilter</a></li>
+                                <li class=""><a href="ColorMatrixFilter.html" title="ColorMatrixFilter">ColorMatrixFilter</a></li>
+                                <li class=""><a href="Command.html" title="Command">Command</a></li>
+                                <li class=""><a href="Container.html" title="Container">Container</a></li>
+                                <li class=""><a href="DisplayObject.html" title="DisplayObject">DisplayObject</a></li>
+                                <li class=""><a href="DOMElement.html" title="DOMElement">DOMElement</a></li>
+                                <li class=""><a href="Filter.html" title="Filter">Filter</a></li>
+                                <li class=""><a href="Graphics.html" title="Graphics">Graphics</a></li>
+                                <li class=""><a href="Matrix2D.html" title="Matrix2D">Matrix2D</a></li>
+                                <li class=""><a href="MouseEvent.html" title="MouseEvent">MouseEvent</a></li>
+                                <li class=""><a href="Point.html" title="Point">Point</a></li>
+                                <li class=""><a href="Rectangle.html" title="Rectangle">Rectangle</a></li>
+                                <li class=""><a href="Shadow.html" title="Shadow">Shadow</a></li>
+                                <li class=""><a href="Shape.html" title="Shape">Shape</a></li>
+                                <li class=""><a href="SpriteSheet.html" title="SpriteSheet">SpriteSheet</a></li>
+                                <li class=""><a href="SpriteSheetUtils.html" title="SpriteSheetUtils">SpriteSheetUtils</a></li>
+                                <li class=""><a href="Stage.html" title="Stage">Stage</a></li>
+                                <li class=""><a href="Text.html" title="Text">Text</a></li>
+                                <li class=""><a href="Ticker.html" title="Ticker">Ticker</a></li>
+                                <li class=""><a href="Touch.html" title="Touch">Touch</a></li>
+                                <li class=""><a href="UID.html" title="UID">UID</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="Bitmap.js.html" title="Bitmap.js">Bitmap.js</a></li>
+                                <li class=""><a href="BitmapAnimation.js.html" title="BitmapAnimation.js">BitmapAnimation.js</a></li>
+                                <li class=""><a href="BoxBlurFilter.js.html" title="BoxBlurFilter.js">BoxBlurFilter.js</a></li>
+                                <li class=""><a href="ColorFilter.js.html" title="ColorFilter.js">ColorFilter.js</a></li>
+                                <li class=""><a href="ColorMatrixFilter.js.html" title="ColorMatrixFilter.js">ColorMatrixFilter.js</a></li>
+                                <li class=""><a href="Container.js.html" title="Container.js">Container.js</a></li>
+                                <li class="selected"><a href="DisplayObject.js.html" title="DisplayObject.js">DisplayObject.js</a></li>
+                                <li class=""><a href="DOMElement.js.html" title="DOMElement.js">DOMElement.js</a></li>
+                                <li class=""><a href="Filter.js.html" title="Filter.js">Filter.js</a></li>
+                                <li class=""><a href="Graphics.js.html" title="Graphics.js">Graphics.js</a></li>
+                                <li class=""><a href="Matrix2D.js.html" title="Matrix2D.js">Matrix2D.js</a></li>
+                                <li class=""><a href="MouseEvent.js.html" title="MouseEvent.js">MouseEvent.js</a></li>
+                                <li class=""><a href="Point.js.html" title="Point.js">Point.js</a></li>
+                                <li class=""><a href="Rectangle.js.html" title="Rectangle.js">Rectangle.js</a></li>
+                                <li class=""><a href="Shadow.js.html" title="Shadow.js">Shadow.js</a></li>
+                                <li class=""><a href="Shape.js.html" title="Shape.js">Shape.js</a></li>
+                                <li class=""><a href="SpriteSheet.js.html" title="SpriteSheet.js">SpriteSheet.js</a></li>
+                                <li class=""><a href="SpriteSheetUtils.js.html" title="SpriteSheetUtils.js">SpriteSheetUtils.js</a></li>
+                                <li class=""><a href="Stage.js.html" title="Stage.js">Stage.js</a></li>
+                                <li class=""><a href="Text.js.html" title="Text.js">Text.js</a></li>
+                                <li class=""><a href="Ticker.js.html" title="Ticker.js">Ticker.js</a></li>
+                                <li class=""><a href="Touch.js.html" title="Touch.js">Touch.js</a></li>
+                                <li class=""><a href="UID.js.html" title="UID.js">UID.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	
+	<!--footer-->
+	<!--
+	<div id="ft">
+        <hr />
+	</div>
+	-->
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"url": "Graphics.html#property_a", "access": "protected", "host": "Graphics", "type": "property", "name": "a"}, {"url": "Matrix2D.html#property_a", "access": "", "host": "Matrix2D", "type": "property", "name": "a"}, {"url": "Graphics.html#property__active", "access": "protected", "host": "Graphics", "type": "property", "name": "_active"}, {"url": "Graphics.html#property__activeInstructions", "access": "protected", "host": "Graphics", "type": "property", "name": "_activeInstructions"}, {"url": "Stage.html#property__activeMouseEvent", "access": "protected", "host": "Stage", "type": "property", "name": "_activeMouseEvent"}, {"url": "Stage.html#property__activeMouseTarget", "access": "protected", "host": "Stage", "type": "property", "name": "_activeMouseTarget"}, {"url": "Container.html#method_addChild", "access": "", "host": "Container", "type": "method", "name": "addChild"}, {"url": "Container.html#method_addChildAt", "access": "", "host": "Container", "type": "method", "name": "addChildAt"}, {"url": "Ticker.html#method_addListener", "access": "", "host": "Ticker", "type": "method", "name": "addListener"}, {"url": "BitmapAnimation.html#method_advance", "access": "", "host": "BitmapAnimation", "type": "method", "name": "advance"}, {"url": "BitmapAnimation.html#property__advanceCount", "access": "protected", "host": "BitmapAnimation", "type": "property", "name": "_advanceCount"}, {"url": "DisplayObject.html#property_alpha", "access": "", "host": "DisplayObject", "type": "property", "name": "alpha"}, {"url": "Matrix2D.html#property_alpha", "access": "", "host": "Matrix2D", "type": "property", "name": "alpha"}, {"url": "BitmapAnimation.html#property__animation", "access": "protected", "host": "BitmapAnimation", "type": "property", "name": "_animation"}, {"url": "SpriteSheet.html#property__animations", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_animations"}, {"url": "Matrix2D.html#method_append", "access": "", "host": "Matrix2D", "type": "method", "name": "append"}, {"url": "Matrix2D.html#method_appendMatrix", "access": "", "host": "Matrix2D", "type": "method", "name": "appendMatrix"}, {"url": "Matrix2D.html#method_appendProperties", "access": "", "host": "Matrix2D", "type": "method", "name": "appendProperties"}, {"url": "Matrix2D.html#method_appendTransform", "access": "", "host": "Matrix2D", "type": "method", "name": "appendTransform"}, {"url": "BoxBlurFilter.html#method_applyFilter", "access": "", "host": "BoxBlurFilter", "type": "method", "name": "applyFilter"}, {"url": "ColorFilter.html#method_applyFilter", "access": "", "host": "ColorFilter", "type": "method", "name": "applyFilter"}, {"url": "ColorMatrixFilter.html#method_applyFilter", "access": "", "host": "ColorMatrixFilter", "type": "method", "name": "applyFilter"}, {"url": "Filter.html#method_applyFilter", "access": "", "host": "Filter", "type": "method", "name": "applyFilter"}, {"url": "DisplayObject.html#method__applyFilters", "access": "protected", "host": "DisplayObject", "type": "method", "name": "_applyFilters"}, {"url": "DisplayObject.html#method_applyShadow", "access": "protected", "host": "DisplayObject", "type": "method", "name": "applyShadow"}, {"url": "Graphics.html#method_arc", "access": "", "host": "Graphics", "type": "method", "name": "arc"}, {"url": "Graphics.html#method_arcTo", "access": "", "host": "Graphics", "type": "method", "name": "arcTo"}, {"url": "Graphics.html#property_at", "access": "protected", "host": "Graphics", "type": "property", "name": "at"}, {"url": "Matrix2D.html#property_atx", "access": "", "host": "Matrix2D", "type": "property", "name": "atx"}, {"url": "Stage.html#property_autoClear", "access": "", "host": "Stage", "type": "property", "name": "autoClear"}, {"url": "Matrix2D.html#property_b", "access": "", "host": "Matrix2D", "type": "property", "name": "b"}, {"url": "Graphics.html#method_beginBitmapFill", "access": "", "host": "Graphics", "type": "method", "name": "beginBitmapFill"}, {"url": "Graphics.html#method_beginBitmapStroke", "access": "", "host": "Graphics", "type": "method", "name": "beginBitmapStroke"}, {"url": "Graphics.html#property_beginCmd", "access": "protected", "host": "Graphics", "type": "property", "name": "beginCmd"}, {"url": "Graphics.html#method_beginFill", "access": "", "host": "Graphics", "type": "method", "name": "beginFill"}, {"url": "Graphics.html#method_beginLinearGradientFill", "access": "", "host": "Graphics", "type": "method", "name": "beginLinearGradientFill"}, {"url": "Graphics.html#method_beginLinearGradientStroke", "access": "", "host": "Graphics", "type": "method", "name": "beginLinearGradientStroke"}, {"url": "Graphics.html#method_beginRadialGradientFill", "access": "", "host": "Graphics", "type": "method", "name": "beginRadialGradientFill"}, {"url": "Graphics.html#method_beginRadialGradientStroke", "access": "", "host": "Graphics", "type": "method", "name": "beginRadialGradientStroke"}, {"url": "Graphics.html#method_beginStroke", "access": "", "host": "Graphics", "type": "method", "name": "beginStroke"}, {"url": "Graphics.html#method_bezierCurveTo", "access": "", "host": "Graphics", "type": "method", "name": "bezierCurveTo"}, {"url": "Graphics.html#property_bf", "access": "protected", "host": "Graphics", "type": "property", "name": "bf"}, {"url": "Shadow.html#property_blur", "access": "", "host": "Shadow", "type": "property", "name": "blur"}, {"url": "Graphics.html#property_bs", "access": "protected", "host": "Graphics", "type": "property", "name": "bs"}, {"url": "Graphics.html#property_bt", "access": "protected", "host": "Graphics", "type": "property", "name": "bt"}, {"url": "Graphics.html#property_c", "access": "protected", "host": "Graphics", "type": "property", "name": "c"}, {"url": "Matrix2D.html#property_c", "access": "", "host": "Matrix2D", "type": "property", "name": "c"}, {"url": "Bitmap.html#method_cache", "access": "", "host": "Bitmap", "type": "method", "name": "cache"}, {"url": "BitmapAnimation.html#method_cache", "access": "", "host": "BitmapAnimation", "type": "method", "name": "cache"}, {"url": "DisplayObject.html#method_cache", "access": "", "host": "DisplayObject", "type": "method", "name": "cache"}, {"url": "DOMElement.html#method_cache", "access": "", "host": "DOMElement", "type": "method", "name": "cache"}, {"url": "DisplayObject.html#property_cacheCanvas", "access": "", "host": "DisplayObject", "type": "property", "name": "cacheCanvas"}, {"url": "DisplayObject.html#property__cacheDataURL", "access": "protected", "host": "DisplayObject", "type": "property", "name": "_cacheDataURL"}, {"url": "DisplayObject.html#property__cacheDataURLID", "access": "protected", "host": "DisplayObject", "type": "property", "name": "_cacheDataURLID"}, {"url": "DisplayObject.html#property_cacheID", "access": "", "host": "DisplayObject", "type": "property", "name": "cacheID"}, {"url": "DisplayObject.html#property__cacheOffsetX", "access": "protected", "host": "DisplayObject", "type": "property", "name": "_cacheOffsetX"}, {"url": "DisplayObject.html#property__cacheOffsetY", "access": "protected", "host": "DisplayObject", "type": "property", "name": "_cacheOffsetY"}, {"url": "SpriteSheet.html#method__calculateFrames", "access": "protected", "host": "SpriteSheet", "type": "method", "name": "_calculateFrames"}, {"url": "Stage.html#property_canvas", "access": "", "host": "Stage", "type": "property", "name": "canvas"}, {"url": "Container.html#property_children", "access": "", "host": "Container", "type": "property", "name": "children"}, {"url": "Graphics.html#method_clear", "access": "", "host": "Graphics", "type": "method", "name": "clear"}, {"url": "Stage.html#method_clear", "access": "", "host": "Stage", "type": "method", "name": "clear"}, {"url": "Bitmap.html#method_clone", "access": "", "host": "Bitmap", "type": "method", "name": "clone"}, {"url": "BitmapAnimation.html#method_clone", "access": "", "host": "BitmapAnimation", "type": "method", "name": "clone"}, {"url": "Container.html#method_clone", "access": "", "host": "Container", "type": "method", "name": "clone"}, {"url": "DisplayObject.html#method_clone", "access": "", "host": "DisplayObject", "type": "method", "name": "clone"}, {"url": "DOMElement.html#method_clone", "access": "", "host": "DOMElement", "type": "method", "name": "clone"}, {"url": "Graphics.html#method_clone", "access": "", "host": "Graphics", "type": "method", "name": "clone"}, {"url": "Shadow.html#method_clone", "access": "", "host": "Shadow", "type": "method", "name": "clone"}, {"url": "Shape.html#method_clone", "access": "", "host": "Shape", "type": "method", "name": "clone"}, {"url": "SpriteSheet.html#method_clone", "access": "", "host": "SpriteSheet", "type": "method", "name": "clone"}, {"url": "Stage.html#method_clone", "access": "", "host": "Stage", "type": "method", "name": "clone"}, {"url": "Text.html#method_clone", "access": "", "host": "Text", "type": "method", "name": "clone"}, {"url": "MouseEvent.html#method_clone", "access": "", "host": "MouseEvent", "type": "method", "name": "clone"}, {"url": "BoxBlurFilter.html#method_clone", "access": "", "host": "BoxBlurFilter", "type": "method", "name": "clone"}, {"url": "ColorFilter.html#method_clone", "access": "", "host": "ColorFilter", "type": "method", "name": "clone"}, {"url": "ColorMatrixFilter.html#method_clone", "access": "", "host": "ColorMatrixFilter", "type": "method", "name": "clone"}, {"url": "Filter.html#method_clone", "access": "", "host": "Filter", "type": "method", "name": "clone"}, {"url": "Matrix2D.html#method_clone", "access": "", "host": "Matrix2D", "type": "method", "name": "clone"}, {"url": "Point.html#method_clone", "access": "", "host": "Point", "type": "method", "name": "clone"}, {"url": "Rectangle.html#method_clone", "access": "", "host": "Rectangle", "type": "method", "name": "clone"}, {"url": "BitmapAnimation.html#method_cloneProps", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "cloneProps"}, {"url": "DisplayObject.html#method_cloneProps", "access": "protected", "host": "DisplayObject", "type": "method", "name": "cloneProps"}, {"url": "Text.html#method_cloneProps", "access": "protected", "host": "Text", "type": "method", "name": "cloneProps"}, {"url": "Graphics.html#method_closePath", "access": "", "host": "Graphics", "type": "method", "name": "closePath"}, {"url": "Shadow.html#property_color", "access": "", "host": "Shadow", "type": "property", "name": "color"}, {"url": "Text.html#property_color", "access": "", "host": "Text", "type": "property", "name": "color"}, {"url": "SpriteSheet.html#property_complete", "access": "", "host": "SpriteSheet", "type": "property", "name": "complete"}, {"url": "DisplayObject.html#property_compositeOperation", "access": "", "host": "DisplayObject", "type": "property", "name": "compositeOperation"}, {"url": "Matrix2D.html#property_compositeOperation", "access": "", "host": "Matrix2D", "type": "property", "name": "compositeOperation"}, {"url": "Container.html#method_contains", "access": "", "host": "Container", "type": "method", "name": "contains"}, {"url": "Graphics.html#property_cp", "access": "protected", "host": "Graphics", "type": "property", "name": "cp"}, {"url": "Graphics.html#property__ctx", "access": "protected", "host": "Graphics", "type": "property", "name": "_ctx"}, {"url": "BitmapAnimation.html#property_currentAnimation", "access": "", "host": "BitmapAnimation", "type": "property", "name": "currentAnimation"}, {"url": "BitmapAnimation.html#property_currentAnimationFrame", "access": "", "host": "BitmapAnimation", "type": "property", "name": "currentAnimationFrame"}, {"url": "BitmapAnimation.html#property_currentFrame", "access": "", "host": "BitmapAnimation", "type": "property", "name": "currentFrame"}, {"url": "Graphics.html#property_curveTo", "access": "", "host": "Graphics", "type": "property", "name": "curveTo"}, {"url": "Matrix2D.html#property_d", "access": "", "host": "Matrix2D", "type": "property", "name": "d"}, {"url": "SpriteSheet.html#property__data", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_data"}, {"url": "Graphics.html#property_dc", "access": "protected", "host": "Graphics", "type": "property", "name": "dc"}, {"url": "Graphics.html#property_de", "access": "protected", "host": "Graphics", "type": "property", "name": "de"}, {"url": "Matrix2D.html#method_decompose", "access": "", "host": "Matrix2D", "type": "method", "name": "decompose"}, {"url": "Matrix2D.html#property_DEG_TO_RAD", "access": "", "host": "Matrix2D", "type": "property", "name": "DEG_TO_RAD"}, {"url": "Graphics.html#property__dirty", "access": "protected", "host": "Graphics", "type": "property", "name": "_dirty"}, {"url": "Graphics.html#property_dp", "access": "protected", "host": "Graphics", "type": "property", "name": "dp"}, {"url": "Graphics.html#property_dr", "access": "protected", "host": "Graphics", "type": "property", "name": "dr"}, {"url": "Bitmap.html#method_draw", "access": "", "host": "Bitmap", "type": "method", "name": "draw"}, {"url": "BitmapAnimation.html#method_draw", "access": "", "host": "BitmapAnimation", "type": "method", "name": "draw"}, {"url": "Container.html#method_draw", "access": "", "host": "Container", "type": "method", "name": "draw"}, {"url": "DisplayObject.html#method_draw", "access": "", "host": "DisplayObject", "type": "method", "name": "draw"}, {"url": "DOMElement.html#method_draw", "access": "", "host": "DOMElement", "type": "method", "name": "draw"}, {"url": "Graphics.html#method_draw", "access": "", "host": "Graphics", "type": "method", "name": "draw"}, {"url": "Shape.html#method_draw", "access": "", "host": "Shape", "type": "method", "name": "draw"}, {"url": "Text.html#method_draw", "access": "", "host": "Text", "type": "method", "name": "draw"}, {"url": "Graphics.html#method_drawCircle", "access": "", "host": "Graphics", "type": "method", "name": "drawCircle"}, {"url": "Graphics.html#method_drawEllipse", "access": "", "host": "Graphics", "type": "method", "name": "drawEllipse"}, {"url": "Graphics.html#method_drawPolyStar", "access": "", "host": "Graphics", "type": "method", "name": "drawPolyStar"}, {"url": "Graphics.html#property_drawRect", "access": "", "host": "Graphics", "type": "property", "name": "drawRect"}, {"url": "Graphics.html#method_drawRoundRect", "access": "", "host": "Graphics", "type": "method", "name": "drawRoundRect"}, {"url": "Graphics.html#method_drawRoundRectComplex", "access": "", "host": "Graphics", "type": "method", "name": "drawRoundRectComplex"}, {"url": "Text.html#method__drawTextLine", "access": "protected", "host": "Text", "type": "method", "name": "_drawTextLine"}, {"url": "Graphics.html#property_ef", "access": "protected", "host": "Graphics", "type": "property", "name": "ef"}, {"url": "Touch.html#method_enable", "access": "", "host": "Touch", "type": "method", "name": "enable"}, {"url": "Stage.html#method__enableMouseEvents", "access": "protected", "host": "Stage", "type": "method", "name": "_enableMouseEvents"}, {"url": "Stage.html#method_enableMouseOver", "access": "", "host": "Stage", "type": "method", "name": "enableMouseOver"}, {"url": "Graphics.html#method_endFill", "access": "", "host": "Graphics", "type": "method", "name": "endFill"}, {"url": "Graphics.html#method_endStroke", "access": "", "host": "Graphics", "type": "method", "name": "endStroke"}, {"url": "Graphics.html#property_es", "access": "protected", "host": "Graphics", "type": "property", "name": "es"}, {"url": "Command.html#method_exec", "access": "", "host": "Command", "type": "method", "name": "exec"}, {"url": "SpriteSheetUtils.html#method_extractFrame", "access": "", "host": "SpriteSheetUtils", "type": "method", "name": "extractFrame"}, {"url": "Graphics.html#property_f", "access": "protected", "host": "Graphics", "type": "property", "name": "f"}, {"url": "Graphics.html#property_fillCmd", "access": "protected", "host": "Graphics", "type": "property", "name": "fillCmd"}, {"url": "Graphics.html#property__fillInstructions", "access": "protected", "host": "Graphics", "type": "property", "name": "_fillInstructions"}, {"url": "DisplayObject.html#property_filters", "access": "", "host": "DisplayObject", "type": "property", "name": "filters"}, {"url": "Touch.html#method__findPrimaryTouch", "access": "protected", "host": "Touch", "type": "method", "name": "_findPrimaryTouch"}, {"url": "SpriteSheetUtils.html#method_flip", "access": "", "host": "SpriteSheetUtils", "type": "method", "name": "flip"}, {"url": "Text.html#property_font", "access": "", "host": "Text", "type": "property", "name": "font"}, {"url": "SpriteSheet.html#property__frameHeight", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_frameHeight"}, {"url": "SpriteSheet.html#property__frames", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_frames"}, {"url": "SpriteSheet.html#property__frameWidth", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_frameWidth"}, {"url": "UID.html#method_get", "access": "", "host": "UID", "type": "method", "name": "get"}, {"url": "SpriteSheet.html#method_getAnimations", "access": "", "host": "SpriteSheet", "type": "method", "name": "getAnimations"}, {"url": "BoxBlurFilter.html#method_getBounds", "access": "", "host": "BoxBlurFilter", "type": "method", "name": "getBounds"}, {"url": "Filter.html#method_getBounds", "access": "", "host": "Filter", "type": "method", "name": "getBounds"}, {"url": "DisplayObject.html#method_getCacheDataURL.", "access": "", "host": "DisplayObject", "type": "method", "name": "getCacheDataURL."}, {"url": "Container.html#method_getChildAt", "access": "", "host": "Container", "type": "method", "name": "getChildAt"}, {"url": "Container.html#method_getChildIndex", "access": "", "host": "Container", "type": "method", "name": "getChildIndex"}, {"url": "DisplayObject.html#method_getConcatenatedMatrix", "access": "", "host": "DisplayObject", "type": "method", "name": "getConcatenatedMatrix"}, {"url": "Ticker.html#method_getFPS", "access": "", "host": "Ticker", "type": "method", "name": "getFPS"}, {"url": "SpriteSheet.html#method_getFrame", "access": "", "host": "SpriteSheet", "type": "method", "name": "getFrame"}, {"url": "Graphics.html#method_getHSL", "access": "", "host": "Graphics", "type": "method", "name": "getHSL"}, {"url": "Ticker.html#method_getInterval", "access": "", "host": "Ticker", "type": "method", "name": "getInterval"}, {"url": "Ticker.html#method_getMeasuredFPS", "access": "", "host": "Ticker", "type": "method", "name": "getMeasuredFPS"}, {"url": "Text.html#method_getMeasuredLineHeight", "access": "", "host": "Text", "type": "method", "name": "getMeasuredLineHeight"}, {"url": "Text.html#method_getMeasuredWidth", "access": "", "host": "Text", "type": "method", "name": "getMeasuredWidth"}, {"url": "Container.html#method_getNumChildren", "access": "", "host": "Container", "type": "method", "name": "getNumChildren"}, {"url": "SpriteSheet.html#method_getNumFrames", "access": "", "host": "SpriteSheet", "type": "method", "name": "getNumFrames"}, {"url": "Container.html#method__getObjectsUnderPoint", "access": "protected", "host": "Container", "type": "method", "name": "_getObjectsUnderPoint"}, {"url": "Container.html#method_getObjectsUnderPoint", "access": "", "host": "Container", "type": "method", "name": "getObjectsUnderPoint"}, {"url": "Container.html#method_getObjectUnderPoint", "access": "", "host": "Container", "type": "method", "name": "getObjectUnderPoint"}, {"url": "Ticker.html#method_getPaused", "access": "", "host": "Ticker", "type": "method", "name": "getPaused"}, {"url": "Graphics.html#method_getRGB", "access": "", "host": "Graphics", "type": "method", "name": "getRGB"}, {"url": "DisplayObject.html#method_getStage", "access": "", "host": "DisplayObject", "type": "method", "name": "getStage"}, {"url": "Ticker.html#method_getTicks", "access": "", "host": "Ticker", "type": "method", "name": "getTicks"}, {"url": "Ticker.html#method__getTime", "access": "protected", "host": "Ticker", "type": "method", "name": "_getTime"}, {"url": "Ticker.html#method_getTime", "access": "", "host": "Ticker", "type": "method", "name": "getTime"}, {"url": "Text.html#method__getWorkingContext", "access": "protected", "host": "Text", "type": "method", "name": "_getWorkingContext"}, {"url": "DisplayObject.html#method_globalToLocal", "access": "", "host": "DisplayObject", "type": "method", "name": "globalToLocal"}, {"url": "DOMElement.html#method_globalToLocal", "access": "", "host": "DOMElement", "type": "method", "name": "globalToLocal"}, {"url": "BitmapAnimation.html#method__goto", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "_goto"}, {"url": "BitmapAnimation.html#method_gotoAndPlay", "access": "", "host": "BitmapAnimation", "type": "method", "name": "gotoAndPlay"}, {"url": "BitmapAnimation.html#method_gotoAndStop", "access": "", "host": "BitmapAnimation", "type": "method", "name": "gotoAndStop"}, {"url": "Shape.html#property_graphics", "access": "", "host": "Shape", "type": "property", "name": "graphics"}, {"url": "Ticker.html#method__handleAF", "access": "protected", "host": "Ticker", "type": "method", "name": "_handleAF"}, {"url": "Stage.html#method__handleDoubleClick", "access": "protected", "host": "Stage", "type": "method", "name": "_handleDoubleClick"}, {"url": "SpriteSheet.html#method__handleImageLoad", "access": "protected", "host": "SpriteSheet", "type": "method", "name": "_handleImageLoad"}, {"url": "Stage.html#method__handleMouseDown", "access": "protected", "host": "Stage", "type": "method", "name": "_handleMouseDown"}, {"url": "Stage.html#method__handleMouseMove", "access": "protected", "host": "Stage", "type": "method", "name": "_handleMouseMove"}, {"url": "Stage.html#method__handleMouseUp", "access": "protected", "host": "Stage", "type": "method", "name": "_handleMouseUp"}, {"url": "Ticker.html#method__handleTimeout", "access": "protected", "host": "Ticker", "type": "method", "name": "_handleTimeout"}, {"url": "Touch.html#method__handleTouchEnd", "access": "protected", "host": "Touch", "type": "method", "name": "_handleTouchEnd"}, {"url": "Touch.html#method__handleTouchMove", "access": "protected", "host": "Touch", "type": "method", "name": "_handleTouchMove"}, {"url": "Touch.html#method__handleTouchStart", "access": "protected", "host": "Touch", "type": "method", "name": "_handleTouchStart"}, {"url": "Rectangle.html#property_height", "access": "", "host": "Rectangle", "type": "property", "name": "height"}, {"url": "Container.html#method_hitTest", "access": "", "host": "Container", "type": "method", "name": "hitTest"}, {"url": "DisplayObject.html#method_hitTest", "access": "", "host": "DisplayObject", "type": "method", "name": "hitTest"}, {"url": "DisplayObject.html#property__hitTestCanvas", "access": "protected", "host": "DisplayObject", "type": "property", "name": "_hitTestCanvas"}, {"url": "DisplayObject.html#property__hitTestContext", "access": "protected", "host": "DisplayObject", "type": "property", "name": "_hitTestContext"}, {"url": "DOMElement.html#property_htmlElement", "access": "", "host": "DOMElement", "type": "property", "name": "htmlElement"}, {"url": "DisplayObject.html#property_id", "access": "", "host": "DisplayObject", "type": "property", "name": "id"}, {"url": "Shadow.html#property_identity", "access": "", "host": "Shadow", "type": "property", "name": "identity"}, {"url": "Matrix2D.html#property_identity", "access": "", "host": "Matrix2D", "type": "property", "name": "identity"}, {"url": "Matrix2D.html#method_identity", "access": "", "host": "Matrix2D", "type": "method", "name": "identity"}, {"url": "Bitmap.html#property_image", "access": "", "host": "Bitmap", "type": "property", "name": "image"}, {"url": "SpriteSheet.html#property__images", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_images"}, {"url": "Ticker.html#method_init", "access": "", "host": "Ticker", "type": "method", "name": "init"}, {"url": "Ticker.html#property__inited", "access": "protected", "host": "Ticker", "type": "property", "name": "_inited"}, {"url": "Bitmap.html#method_initialize", "access": "protected", "host": "Bitmap", "type": "method", "name": "initialize"}, {"url": "BitmapAnimation.html#method_initialize", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "initialize"}, {"url": "Container.html#method_initialize", "access": "protected", "host": "Container", "type": "method", "name": "initialize"}, {"url": "DisplayObject.html#method_initialize", "access": "protected", "host": "DisplayObject", "type": "method", "name": "initialize"}, {"url": "DOMElement.html#method_initialize", "access": "protected", "host": "DOMElement", "type": "method", "name": "initialize"}, {"url": "Graphics.html#method_initialize", "access": "protected", "host": "Graphics", "type": "method", "name": "initialize"}, {"url": "Shadow.html#method_initialize", "access": "protected", "host": "Shadow", "type": "method", "name": "initialize"}, {"url": "SpriteSheet.html#method_initialize", "access": "protected", "host": "SpriteSheet", "type": "method", "name": "initialize"}, {"url": "Text.html#method_initialize", "access": "protected", "host": "Text", "type": "method", "name": "initialize"}, {"url": "MouseEvent.html#method_initialize", "access": "protected", "host": "MouseEvent", "type": "method", "name": "initialize"}, {"url": "ColorFilter.html#method_initialize", "access": "protected", "host": "ColorFilter", "type": "method", "name": "initialize"}, {"url": "ColorMatrixFilter.html#method_initialize", "access": "protected", "host": "ColorMatrixFilter", "type": "method", "name": "initialize"}, {"url": "Filter.html#method_initialize", "access": "protected", "host": "Filter", "type": "method", "name": "initialize"}, {"url": "Matrix2D.html#method_initialize", "access": "protected", "host": "Matrix2D", "type": "method", "name": "initialize"}, {"url": "Point.html#method_initialize", "access": "protected", "host": "Point", "type": "method", "name": "initialize"}, {"url": "Rectangle.html#method_initialize", "access": "protected", "host": "Rectangle", "type": "method", "name": "initialize"}, {"url": "Shape.html#method_initialize\r\nparam {Graphics} graphics", "access": "protected", "host": "Shape", "type": "method", "name": "initialize\r\nparam {Graphics} graphics"}, {"url": "Stage.html#method_initialize\r\nparam {HTMLCanvasElement} canvas", "access": "protected", "host": "Stage", "type": "method", "name": "initialize\r\nparam {HTMLCanvasElement} canvas"}, {"url": "Graphics.html#property__instructions", "access": "protected", "host": "Graphics", "type": "property", "name": "_instructions"}, {"url": "Ticker.html#property__interval", "access": "protected", "host": "Ticker", "type": "property", "name": "_interval"}, {"url": "Matrix2D.html#method_invert", "access": "", "host": "Matrix2D", "type": "method", "name": "invert"}, {"url": "Matrix2D.html#method_isIdentity", "access": "", "host": "Matrix2D", "type": "method", "name": "isIdentity"}, {"url": "Touch.html#method_isSupported", "access": "", "host": "Touch", "type": "method", "name": "isSupported"}, {"url": "Bitmap.html#method_isVisible", "access": "", "host": "Bitmap", "type": "method", "name": "isVisible"}, {"url": "BitmapAnimation.html#method_isVisible", "access": "", "host": "BitmapAnimation", "type": "method", "name": "isVisible"}, {"url": "Container.html#method_isVisible", "access": "", "host": "Container", "type": "method", "name": "isVisible"}, {"url": "DisplayObject.html#method_isVisible", "access": "", "host": "DisplayObject", "type": "method", "name": "isVisible"}, {"url": "DOMElement.html#method_isVisible", "access": "", "host": "DOMElement", "type": "method", "name": "isVisible"}, {"url": "Shape.html#method_isVisible", "access": "", "host": "Shape", "type": "method", "name": "isVisible"}, {"url": "Text.html#method_isVisible", "access": "", "host": "Text", "type": "method", "name": "isVisible"}, {"url": "Ticker.html#property__lastTime", "access": "protected", "host": "Ticker", "type": "property", "name": "_lastTime"}, {"url": "Graphics.html#property_lf", "access": "protected", "host": "Graphics", "type": "property", "name": "lf"}, {"url": "Text.html#property_lineHeight", "access": "", "host": "Text", "type": "property", "name": "lineHeight"}, {"url": "Graphics.html#method_lineTo", "access": "", "host": "Graphics", "type": "method", "name": "lineTo"}, {"url": "Text.html#property_lineWidth", "access": "", "host": "Text", "type": "property", "name": "lineWidth"}, {"url": "Ticker.html#property__listeners", "access": "protected", "host": "Ticker", "type": "property", "name": "_listeners"}, {"url": "SpriteSheet.html#property__loadCount", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_loadCount"}, {"url": "DisplayObject.html#method_localToGlobal", "access": "", "host": "DisplayObject", "type": "method", "name": "localToGlobal"}, {"url": "DOMElement.html#method_localToGlobal", "access": "", "host": "DOMElement", "type": "method", "name": "localToGlobal"}, {"url": "DisplayObject.html#method_localToLocal", "access": "", "host": "DisplayObject", "type": "method", "name": "localToLocal"}, {"url": "DOMElement.html#method_localToLocal", "access": "", "host": "DOMElement", "type": "method", "name": "localToLocal"}, {"url": "Graphics.html#property_ls", "access": "protected", "host": "Graphics", "type": "property", "name": "ls"}, {"url": "Graphics.html#property_lt", "access": "protected", "host": "Graphics", "type": "property", "name": "lt"}, {"url": "DisplayObject.html#property__matrix", "access": "protected", "host": "DisplayObject", "type": "property", "name": "_matrix"}, {"url": "Text.html#property_maxWidth", "access": "", "host": "Text", "type": "property", "name": "maxWidth"}, {"url": "DisplayObject.html#property_mouseEnabled", "access": "", "host": "DisplayObject", "type": "property", "name": "mouseEnabled"}, {"url": "Stage.html#property_mouseInBounds", "access": "", "host": "Stage", "type": "property", "name": "mouseInBounds"}, {"url": "Stage.html#property__mouseOverIntervalID", "access": "protected", "host": "Stage", "type": "property", "name": "_mouseOverIntervalID"}, {"url": "Stage.html#property__mouseOverTarget", "access": "protected", "host": "Stage", "type": "property", "name": "_mouseOverTarget"}, {"url": "Stage.html#property__mouseOverX", "access": "protected", "host": "Stage", "type": "property", "name": "_mouseOverX"}, {"url": "Stage.html#property__mouseOverY", "access": "protected", "host": "Stage", "type": "property", "name": "_mouseOverY"}, {"url": "Stage.html#property_mouseX", "access": "", "host": "Stage", "type": "property", "name": "mouseX"}, {"url": "Stage.html#property_mouseY", "access": "", "host": "Stage", "type": "property", "name": "mouseY"}, {"url": "Graphics.html#method_moveTo", "access": "", "host": "Graphics", "type": "method", "name": "moveTo"}, {"url": "Graphics.html#property_mt", "access": "protected", "host": "Graphics", "type": "property", "name": "mt"}, {"url": "DisplayObject.html#property_name", "access": "", "host": "DisplayObject", "type": "property", "name": "name"}, {"url": "MouseEvent.html#property_nativeEvent", "access": "", "host": "MouseEvent", "type": "property", "name": "nativeEvent"}, {"url": "Graphics.html#method__newPath", "access": "protected", "host": "Graphics", "type": "method", "name": "_newPath"}, {"url": "UID.html#property__nextID", "access": "protected", "host": "UID", "type": "property", "name": "_nextID"}, {"url": "BitmapAnimation.html#method__normalizeCurrentFrame", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "_normalizeCurrentFrame"}, {"url": "SpriteSheet.html#property__numFrames", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_numFrames"}, {"url": "BitmapAnimation.html#property_offset", "access": "", "host": "BitmapAnimation", "type": "property", "name": "offset"}, {"url": "Shadow.html#property_offsetX", "access": "", "host": "Shadow", "type": "property", "name": "offsetX"}, {"url": "Shadow.html#property_offsetY", "access": "", "host": "Shadow", "type": "property", "name": "offsetY"}, {"url": "Graphics.html#property__oldInstructions", "access": "protected", "host": "Graphics", "type": "property", "name": "_oldInstructions"}, {"url": "BitmapAnimation.html#property_onAnimationEnd", "access": "", "host": "BitmapAnimation", "type": "property", "name": "onAnimationEnd"}, {"url": "DisplayObject.html#event_onClick", "access": "", "host": "DisplayObject", "type": "event", "name": "onClick"}, {"url": "DisplayObject.html#event_onDoubleClick", "access": "", "host": "DisplayObject", "type": "event", "name": "onDoubleClick"}, {"url": "Stage.html#event_onMouseDown", "access": "", "host": "Stage", "type": "event", "name": "onMouseDown"}, {"url": "Stage.html#event_onMouseMove", "access": "", "host": "Stage", "type": "event", "name": "onMouseMove"}, {"url": "MouseEvent.html#event_onMouseMove", "access": "", "host": "MouseEvent", "type": "event", "name": "onMouseMove"}, {"url": "DisplayObject.html#event_onMouseOut", "access": "", "host": "DisplayObject", "type": "event", "name": "onMouseOut"}, {"url": "DisplayObject.html#event_onMouseOver", "access": "", "host": "DisplayObject", "type": "event", "name": "onMouseOver"}, {"url": "Stage.html#event_onMouseUp", "access": "", "host": "Stage", "type": "event", "name": "onMouseUp"}, {"url": "MouseEvent.html#event_onMouseUp", "access": "", "host": "MouseEvent", "type": "event", "name": "onMouseUp"}, {"url": "DisplayObject.html#event_onPress", "access": "", "host": "DisplayObject", "type": "event", "name": "onPress"}, {"url": "Text.html#property_outline", "access": "", "host": "Text", "type": "property", "name": "outline"}, {"url": "DisplayObject.html#property_parent", "access": "", "host": "DisplayObject", "type": "property", "name": "parent"}, {"url": "Ticker.html#property__pauseable", "access": "protected", "host": "Ticker", "type": "property", "name": "_pauseable"}, {"url": "BitmapAnimation.html#property_paused", "access": "", "host": "BitmapAnimation", "type": "property", "name": "paused"}, {"url": "Ticker.html#property__paused", "access": "protected", "host": "Ticker", "type": "property", "name": "_paused"}, {"url": "Ticker.html#property__pausedTickers", "access": "protected", "host": "Ticker", "type": "property", "name": "_pausedTickers"}, {"url": "Ticker.html#property__pausedTime", "access": "protected", "host": "Ticker", "type": "property", "name": "_pausedTime"}, {"url": "Matrix2D.html#method_prepend", "access": "", "host": "Matrix2D", "type": "method", "name": "prepend"}, {"url": "Matrix2D.html#method_prependMatrix", "access": "", "host": "Matrix2D", "type": "method", "name": "prependMatrix"}, {"url": "Matrix2D.html#method_prependProperties", "access": "", "host": "Matrix2D", "type": "method", "name": "prependProperties"}, {"url": "Matrix2D.html#method_prependTransform", "access": "", "host": "Matrix2D", "type": "method", "name": "prependTransform"}, {"url": "Graphics.html#property_qt", "access": "protected", "host": "Graphics", "type": "property", "name": "qt"}, {"url": "Graphics.html#method_quadraticCurveTo", "access": "", "host": "Graphics", "type": "method", "name": "quadraticCurveTo"}, {"url": "Graphics.html#property_r", "access": "protected", "host": "Graphics", "type": "property", "name": "r"}, {"url": "Ticker.html#property__rafActive", "access": "protected", "host": "Ticker", "type": "property", "name": "_rafActive"}, {"url": "Graphics.html#property_rc", "access": "protected", "host": "Graphics", "type": "property", "name": "rc"}, {"url": "Graphics.html#method_rect", "access": "", "host": "Graphics", "type": "method", "name": "rect"}, {"url": "DisplayObject.html#property_regX", "access": "", "host": "DisplayObject", "type": "property", "name": "regX"}, {"url": "SpriteSheet.html#property__regX", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_regX"}, {"url": "DisplayObject.html#property_regY", "access": "", "host": "DisplayObject", "type": "property", "name": "regY"}, {"url": "SpriteSheet.html#property__regY", "access": "protected", "host": "SpriteSheet", "type": "property", "name": "_regY"}, {"url": "Container.html#method_removeAllChildren", "access": "", "host": "Container", "type": "method", "name": "removeAllChildren"}, {"url": "Ticker.html#method_removeAllListeners", "access": "", "host": "Ticker", "type": "method", "name": "removeAllListeners"}, {"url": "Container.html#method_removeChild", "access": "", "host": "Container", "type": "method", "name": "removeChild"}, {"url": "Container.html#method_removeChildAt", "access": "", "host": "Container", "type": "method", "name": "removeChildAt"}, {"url": "Ticker.html#method_removeListener", "access": "", "host": "Ticker", "type": "method", "name": "removeListener"}, {"url": "Graphics.html#property_rf", "access": "protected", "host": "Graphics", "type": "property", "name": "rf"}, {"url": "Matrix2D.html#method_rotate", "access": "", "host": "Matrix2D", "type": "method", "name": "rotate"}, {"url": "DisplayObject.html#property_rotation", "access": "", "host": "DisplayObject", "type": "property", "name": "rotation"}, {"url": "Graphics.html#property_rr", "access": "protected", "host": "Graphics", "type": "property", "name": "rr"}, {"url": "Graphics.html#property_rs", "access": "protected", "host": "Graphics", "type": "property", "name": "rs"}, {"url": "Graphics.html#property_s", "access": "protected", "host": "Graphics", "type": "property", "name": "s"}, {"url": "Matrix2D.html#method_scale", "access": "", "host": "Matrix2D", "type": "method", "name": "scale"}, {"url": "DisplayObject.html#property_scaleX", "access": "", "host": "DisplayObject", "type": "property", "name": "scaleX"}, {"url": "DisplayObject.html#property_scaleY", "access": "", "host": "DisplayObject", "type": "property", "name": "scaleY"}, {"url": "Ticker.html#method_setFPS", "access": "", "host": "Ticker", "type": "method", "name": "setFPS"}, {"url": "Ticker.html#method_setInterval", "access": "", "host": "Ticker", "type": "method", "name": "setInterval"}, {"url": "Ticker.html#method_setPaused", "access": "", "host": "Ticker", "type": "method", "name": "setPaused"}, {"url": "Graphics.html#method__setProp", "access": "protected", "host": "Graphics", "type": "method", "name": "_setProp"}, {"url": "Graphics.html#method_setStrokeStyle", "access": "", "host": "Graphics", "type": "method", "name": "setStrokeStyle"}, {"url": "DisplayObject.html#method_setTransform", "access": "", "host": "DisplayObject", "type": "method", "name": "setTransform"}, {"url": "DisplayObject.html#property_shadow", "access": "", "host": "DisplayObject", "type": "property", "name": "shadow"}, {"url": "Matrix2D.html#property_shadow", "access": "", "host": "Matrix2D", "type": "property", "name": "shadow"}, {"url": "Matrix2D.html#method_skew", "access": "", "host": "Matrix2D", "type": "method", "name": "skew"}, {"url": "DisplayObject.html#property_skewX", "access": "", "host": "DisplayObject", "type": "property", "name": "skewX"}, {"url": "DisplayObject.html#property_skewY", "access": "", "host": "DisplayObject", "type": "property", "name": "skewY"}, {"url": "Bitmap.html#property_snapToPixel", "access": "", "host": "Bitmap", "type": "property", "name": "snapToPixel"}, {"url": "BitmapAnimation.html#property_snapToPixel", "access": "", "host": "BitmapAnimation", "type": "property", "name": "snapToPixel"}, {"url": "DisplayObject.html#property_snapToPixel", "access": "", "host": "DisplayObject", "type": "property", "name": "snapToPixel"}, {"url": "Stage.html#property__snapToPixelEnabled", "access": "protected", "host": "Stage", "type": "property", "name": "_snapToPixelEnabled"}, {"url": "Stage.html#property_snapToPixelEnabled", "access": "", "host": "Stage", "type": "property", "name": "snapToPixelEnabled"}, {"url": "Container.html#method_sortChildren", "access": "", "host": "Container", "type": "method", "name": "sortChildren"}, {"url": "BitmapAnimation.html#property_spriteSheet", "access": "", "host": "BitmapAnimation", "type": "property", "name": "spriteSheet"}, {"url": "Graphics.html#property_ss", "access": "protected", "host": "Graphics", "type": "property", "name": "ss"}, {"url": "MouseEvent.html#property_stageX", "access": "", "host": "MouseEvent", "type": "property", "name": "stageX"}, {"url": "MouseEvent.html#property_stageY", "access": "", "host": "MouseEvent", "type": "property", "name": "stageY"}, {"url": "Ticker.html#property__startTime", "access": "protected", "host": "Ticker", "type": "property", "name": "_startTime"}, {"url": "Graphics.html#property_STROKE_CAPS_MAP", "access": "", "host": "Graphics", "type": "property", "name": "STROKE_CAPS_MAP"}, {"url": "Graphics.html#property_strokeCmd", "access": "protected", "host": "Graphics", "type": "property", "name": "strokeCmd"}, {"url": "Graphics.html#property__strokeInstructions", "access": "protected", "host": "Graphics", "type": "property", "name": "_strokeInstructions"}, {"url": "Graphics.html#property_STROKE_JOINTS_MAP", "access": "", "host": "Graphics", "type": "property", "name": "STROKE_JOINTS_MAP"}, {"url": "Graphics.html#property__strokeStyleInstructions", "access": "protected", "host": "Graphics", "type": "property", "name": "_strokeStyleInstructions"}, {"url": "DOMElement.html#property__style", "access": "protected", "host": "DOMElement", "type": "property", "name": "_style"}, {"url": "DisplayObject.html#property_suppressCrossDomainErrors", "access": "", "host": "DisplayObject", "type": "property", "name": "suppressCrossDomainErrors"}, {"url": "MouseEvent.html#property_target", "access": "", "host": "MouseEvent", "type": "property", "name": "target"}, {"url": "DisplayObject.html#method__testHit", "access": "protected", "host": "DisplayObject", "type": "method", "name": "_testHit"}, {"url": "Stage.html#method__testMouseOver", "access": "protected", "host": "Stage", "type": "method", "name": "_testMouseOver"}, {"url": "Text.html#property_text", "access": "", "host": "Text", "type": "property", "name": "text"}, {"url": "Text.html#property_textAlign", "access": "", "host": "Text", "type": "property", "name": "textAlign"}, {"url": "Text.html#property_textBaseline", "access": "", "host": "Text", "type": "property", "name": "textBaseline"}, {"url": "BitmapAnimation.html#method__tick", "access": "protected", "host": "BitmapAnimation", "type": "method", "name": "_tick"}, {"url": "Container.html#method__tick", "access": "protected", "host": "Container", "type": "method", "name": "_tick"}, {"url": "DisplayObject.html#event_tick", "access": "", "host": "DisplayObject", "type": "event", "name": "tick"}, {"url": "Ticker.html#method__tick", "access": "protected", "host": "Ticker", "type": "method", "name": "_tick"}, {"url": "Ticker.html#event_tick", "access": "", "host": "Ticker", "type": "event", "name": "tick"}, {"url": "Stage.html#event_tick\r\nBroadcast to children when the stage is updated.", "access": "", "host": "Stage", "type": "event", "name": "tick\r\nBroadcast to children when the stage is updated."}, {"url": "Stage.html#property_tickOnUpdate", "access": "", "host": "Stage", "type": "property", "name": "tickOnUpdate"}, {"url": "Ticker.html#property__ticks", "access": "protected", "host": "Ticker", "type": "property", "name": "_ticks"}, {"url": "Ticker.html#property__tickTimes", "access": "protected", "host": "Ticker", "type": "property", "name": "_tickTimes"}, {"url": "Ticker.html#property__timeoutID", "access": "protected", "host": "Ticker", "type": "property", "name": "_timeoutID"}, {"url": "Ticker.html#property__times", "access": "protected", "host": "Ticker", "type": "property", "name": "_times"}, {"url": "Stage.html#method_toDataURL", "access": "", "host": "Stage", "type": "method", "name": "toDataURL"}, {"url": "Bitmap.html#method_toString", "access": "", "host": "Bitmap", "type": "method", "name": "toString"}, {"url": "BitmapAnimation.html#method_toString", "access": "", "host": "BitmapAnimation", "type": "method", "name": "toString"}, {"url": "Container.html#method_toString", "access": "", "host": "Container", "type": "method", "name": "toString"}, {"url": "DisplayObject.html#method_toString", "access": "", "host": "DisplayObject", "type": "method", "name": "toString"}, {"url": "DOMElement.html#method_toString", "access": "", "host": "DOMElement", "type": "method", "name": "toString"}, {"url": "Graphics.html#method_toString", "access": "", "host": "Graphics", "type": "method", "name": "toString"}, {"url": "Shadow.html#method_toString", "access": "", "host": "Shadow", "type": "method", "name": "toString"}, {"url": "Shape.html#method_toString", "access": "", "host": "Shape", "type": "method", "name": "toString"}, {"url": "SpriteSheet.html#method_toString", "access": "", "host": "SpriteSheet", "type": "method", "name": "toString"}, {"url": "Stage.html#method_toString", "access": "", "host": "Stage", "type": "method", "name": "toString"}, {"url": "Text.html#method_toString", "access": "", "host": "Text", "type": "method", "name": "toString"}, {"url": "MouseEvent.html#method_toString", "access": "", "host": "MouseEvent", "type": "method", "name": "toString"}, {"url": "BoxBlurFilter.html#method_toString", "access": "", "host": "BoxBlurFilter", "type": "method", "name": "toString"}, {"url": "ColorFilter.html#method_toString", "access": "", "host": "ColorFilter", "type": "method", "name": "toString"}, {"url": "ColorMatrixFilter.html#method_toString", "access": "", "host": "ColorMatrixFilter", "type": "method", "name": "toString"}, {"url": "Filter.html#method_toString", "access": "", "host": "Filter", "type": "method", "name": "toString"}, {"url": "Matrix2D.html#method_toString", "access": "", "host": "Matrix2D", "type": "method", "name": "toString"}, {"url": "Point.html#method_toString", "access": "", "host": "Point", "type": "method", "name": "toString"}, {"url": "Rectangle.html#method_toString", "access": "", "host": "Rectangle", "type": "method", "name": "toString"}, {"url": "Matrix2D.html#method_translate", "access": "", "host": "Matrix2D", "type": "method", "name": "translate"}, {"url": "Matrix2D.html#property_ty", "access": "", "host": "Matrix2D", "type": "property", "name": "ty"}, {"url": "MouseEvent.html#property_type", "access": "", "host": "MouseEvent", "type": "property", "name": "type"}, {"url": "Bitmap.html#method_uncache", "access": "", "host": "Bitmap", "type": "method", "name": "uncache"}, {"url": "BitmapAnimation.html#method_uncache", "access": "", "host": "BitmapAnimation", "type": "method", "name": "uncache"}, {"url": "DisplayObject.html#method_uncache", "access": "", "host": "DisplayObject", "type": "method", "name": "uncache"}, {"url": "DOMElement.html#method_uncache", "access": "", "host": "DOMElement", "type": "method", "name": "uncache"}, {"url": "Stage.html#method_update", "access": "", "host": "Stage", "type": "method", "name": "update"}, {"url": "Bitmap.html#method_updateCache", "access": "", "host": "Bitmap", "type": "method", "name": "updateCache"}, {"url": "BitmapAnimation.html#method_updateCache", "access": "", "host": "BitmapAnimation", "type": "method", "name": "updateCache"}, {"url": "DisplayObject.html#method_updateCache", "access": "", "host": "DisplayObject", "type": "method", "name": "updateCache"}, {"url": "DOMElement.html#method_updateCache", "access": "", "host": "DOMElement", "type": "method", "name": "updateCache"}, {"url": "Graphics.html#method__updateInstructions", "access": "protected", "host": "Graphics", "type": "method", "name": "_updateInstructions"}, {"url": "Stage.html#method__updateMousePosition", "access": "protected", "host": "Stage", "type": "method", "name": "_updateMousePosition"}, {"url": "Ticker.html#property_useRAF", "access": "", "host": "Ticker", "type": "property", "name": "useRAF"}, {"url": "DisplayObject.html#property_visible", "access": "", "host": "DisplayObject", "type": "property", "name": "visible"}, {"url": "Rectangle.html#property_width", "access": "", "host": "Rectangle", "type": "property", "name": "width"}, {"url": "SpriteSheetUtils.html#property__workingCanvas", "access": "protected", "host": "SpriteSheetUtils", "type": "property", "name": "_workingCanvas"}, {"url": "SpriteSheetUtils.html#property__workingContext", "access": "protected", "host": "SpriteSheetUtils", "type": "property", "name": "_workingContext"}, {"url": "DisplayObject.html#property_x", "access": "", "host": "DisplayObject", "type": "property", "name": "x"}, {"url": "Point.html#property_x", "access": "", "host": "Point", "type": "property", "name": "x"}, {"url": "Rectangle.html#property_x", "access": "", "host": "Rectangle", "type": "property", "name": "x"}, {"url": "DisplayObject.html#property_y", "access": "", "host": "DisplayObject", "type": "property", "name": "y"}, {"url": "Point.html#property_y", "access": "", "host": "Point", "type": "property", "name": "y"}, {"url": "Rectangle.html#property_y", "access": "", "host": "Rectangle", "type": "property", "name": "y"}];
+</script>
+</body>
+</html>
